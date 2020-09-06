@@ -30,17 +30,19 @@ namespace ACT.Core.Encoding.ACTPackaging
     public class PackedPathHeader 
     {
         /// <summary>
-        /// The path identifier
+        /// The path identifier  TODO Determine If Needed
         /// </summary>
-        private UInt32 _PathID;
+        /// private UInt32 _PathID;
+
         /// <summary>
         /// The path character length
         /// </summary>
         private UInt16 _PathCharacterLength;
+        
         /// <summary>
-        /// The path
+        /// The path  TODO Determine If Needed
         /// </summary>
-        private string _Path;
+        /// private string _Path;
 
         /// <summary>
         /// Constructor

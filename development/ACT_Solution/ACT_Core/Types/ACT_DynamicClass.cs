@@ -26,14 +26,15 @@ namespace ACT.Core.Types
     public class ACT_DynamicClass
     {
         /// <summary>
-        /// Occurs when [on class changed].
+        /// Occurs when [on class changed]. TODO Determine If Needed
         /// </summary>
-        public event ACT.Core.Delegates.OnChanged OnClassChanged;
+        // public event ACT.Core.Delegates.OnChanged OnClassChanged;
 
         /// <summary>
-        /// The dynamic class hash
+        /// The dynamic class hash  
         /// </summary>
         private int _DynamicClassHash;
+
         /// <summary>
         /// Calculates the class hash.
         /// </summary>

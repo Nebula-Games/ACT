@@ -10,7 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using ACT.Core.Interfaces.Security.Encryption;
 using Newtonsoft.Json;
-
+using ACT.Core.Constants;
 
 namespace ACT.Core.Extensions
 {
@@ -205,15 +205,17 @@ namespace ACT.Core.Extensions
             StringBuilder escaped = new StringBuilder(Uri.EscapeDataString(value));
 
             // Upgrade the escaping to RFC 3986, if necessary.
-            for (int i = 0; i < UriRfc3986CharsToEscape.Length; i++)
+            for (int i = 0; i < WebConstants.UriRfc3986CharsToEscape.Length; i++)
             {
-                escaped.Replace(UriRfc3986CharsToEscape[i], Uri.HexEscape(UriRfc3986CharsToEscape[i][0]));
+                escaped.Replace(WebConstants.UriRfc3986CharsToEscape[i], Uri.HexEscape(WebConstants.UriRfc3986CharsToEscape[i][0]));
             }
 
             // Return the fully-RFC3986-escaped string.
             return escaped.ToString();
         }
-
+        /*       /// <summary>   The URI RFC3986 chars to escape. </summary>
+        private static readonly string[] UriRfc3986CharsToEscape = new[] { "!", "*", "'", "(", ")" };
+*/
         /// <summary>   To String Overload Convert Null To Empty String. </summary>
         ///
         /// <remarks>   Mark Alicz, 12/8/2016. </remarks>

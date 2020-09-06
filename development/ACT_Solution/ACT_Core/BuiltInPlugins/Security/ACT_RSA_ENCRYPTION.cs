@@ -28,17 +28,17 @@ namespace ACT.Core.BuiltInPlugins.Security
     /// ACT RSA Encryption
     /// </summary>
     public class ACT_RSA_ENCRYPTION
-    {        
+    {
 
         /// <summary>
-        /// The plaintext
+        /// The plaintext  TODO Determine If Needed
         /// </summary>
-        private byte[] plaintext;
+        // private byte[] plaintext;
 
         /// <summary>
-        /// The encryptedtext
+        /// The encryptedtext  TODO Determine If Needed
         /// </summary>
-        private byte[] encryptedtext;
+        //private byte[] encryptedtext;
 
         /// <summary>
         /// The byte converter

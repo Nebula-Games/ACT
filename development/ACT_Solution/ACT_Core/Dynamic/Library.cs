@@ -19,10 +19,9 @@ using System.Reflection;
 using System.Xml.Serialization;
 using System.Xml;
 using System.IO;
-using Microsoft.CSharp;
-using System.CodeDom.Compiler;
+using Microsoft.CodeDom.Providers.DotNetCompilerPlatform;
 using ACT.Core.Extensions;
-
+using System.CodeDom.Compiler;
 
 namespace ACT.Core.Dynamic
 {
@@ -281,6 +280,22 @@ namespace ACT.Core.Dynamic
         }
 
 
+        static Lazy<CSharpCodeProvider> CodeProvider { get; } = new Lazy<CSharpCodeProvider>(() => {
+            var csc = new CSharpCodeProvider();
+            var settings = csc
+                .GetType()
+                .GetField("_compilerSettings", BindingFlags.Instance | BindingFlags.NonPublic)
+                .GetValue(csc);
+
+            var path = settings
+                .GetType()
+                .GetField("_compilerFullPath", BindingFlags.Instance | BindingFlags.NonPublic);
+
+            path.SetValue(settings, ((string)path.GetValue(settings)).Replace(@"bin\roslyn\", @"roslyn\"));
+
+            return csc;
+        });
+
         /// <summary>
         /// Compiles the code.
         /// </summary>
@@ -288,7 +303,9 @@ namespace ACT.Core.Dynamic
         /// <returns>Assembly.</returns>
         public static Assembly CompileCode(string Code)
         {
-            var csc = new CSharpCodeProvider(new Dictionary<string, string>() { { "CompilerVersion", "v3.5" } });
+
+            var csc = CodeProvider;
+
             var parameters = new CompilerParameters(new[] { "System.dll" });
 
             parameters.ReferencedAssemblies.Add("System.Core.dll");
@@ -306,7 +323,7 @@ namespace ACT.Core.Dynamic
             }
 
             parameters.GenerateExecutable = false;
-            CompilerResults results = csc.CompileAssemblyFromSource(parameters, Code);
+            CompilerResults results = csc.Value.CompileAssemblyFromSource(parameters, Code);
             results.Errors.Cast<CompilerError>().ToList().ForEach(error => System.Console.WriteLine(error.ErrorText));
             return results.CompiledAssembly;
         }

@@ -310,6 +310,7 @@ namespace ACT.Core.Types.SystemConfiguration
         #region Private Fields
 
         private List<(SettingType settingType, string Key)> _AllSettings = new List<(SettingType settingType, string Key)>();
+        
         private bool _Loaded = false;
 
         #endregion
@@ -336,6 +337,7 @@ namespace ACT.Core.Types.SystemConfiguration
 
             if (_Counter == 0) { return false; }
             return true;
+            _Loaded = true;
         }
 
         #endregion

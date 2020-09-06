@@ -42,7 +42,7 @@ namespace ACT.Core
         /// Installation Found True / False
         /// </summary>
         private static bool _InstallationFound = false;
-        
+
         /// <summary>
         /// Loaded ACT Installation File
         /// </summary>
@@ -64,6 +64,8 @@ namespace ACT.Core
         /// </summary>
         private static Dictionary<string, string> _DirectoryLibrary = new Dictionary<string, string>();
 
+        //private static string InstallationDirectory
+
         #endregion
 
         #region Public Constructors
@@ -73,6 +75,7 @@ namespace ACT.Core
         /// </summary>
         static SystemStatus()
         {
+            
             _DirectoryLibrary.Add("Resources", "\\Resources\\");
             _DirectoryLibrary.Add("Assets", "\\Resources\\Assets\\");
             _DirectoryLibrary.Add("Localization", "\\Resources\\Localization\\");
@@ -100,12 +103,38 @@ namespace ACT.Core
         /// <summary>
         /// Directory Paths Public Property
         /// </summary>
-        public static Dictionary<string,string> DirectoryPaths
+        public static Dictionary<string, string> DirectoryPaths
         {
-            get
+            get { if (_DirectoryLibrary == null) { _DirectoryLibrary = new Dictionary<string, string>(); } return _DirectoryLibrary;}
+        }
+
+        /// <summary>
+        /// Get Directory Path
+        /// </summary>
+        /// <param name="FromInstallationLocation"></param>
+        /// <param name="source"></param>
+        /// <param name="otherSource"></param>
+        /// <returns></returns>
+        public static string GetDirectoryPath(bool FromInstallationLocation, ACT.Core.Enums.Installation.CoreDirectories source, string otherSource = "")
+        {
+            string _tmpReturn = InstallPath.EnsureDirectoryFormat();
+
+            // TODO Modernize This To App Centric Location Based Using Status or 
+            if (!FromInstallationLocation) { AppDomain.CurrentDomain.BaseDirectory.EnsureDirectoryFormat();  }
+
+            if (source == Enums.Installation.CoreDirectories.Other)
             {
-                return _DirectoryLibrary;
+                if (DirectoryPaths.ContainsKey(otherSource)) { return _tmpReturn + DirectoryPaths[otherSource].EnsureDirectoryFormat(); ; }
+                else { throw new Exception("Unable To Locate OtherSource"); } //TODO ADD LOGGING
             }
+            else{
+                string _Base = Enum.GetName(typeof(ACT.Core.Enums.Installation.CoreDirectories), source);
+                if (DirectoryPaths.ContainsKey(_Base))
+                {
+                    return _tmpReturn + DirectoryPaths[_Base].EnsureDirectoryFormat();
+                }
+                else { throw new Exception("Unable To Locate BaseDirectory [" + _Base + "]"); }  // TODO LOG ERROR
+            }            
         }
 
         /// <summary>
@@ -115,7 +144,7 @@ namespace ACT.Core
         {
             get
             {
-                
+
 
                 if (_BaseConfigurationFile != null) { return _BaseConfigurationFile; }
 
@@ -147,14 +176,15 @@ namespace ACT.Core
         /// <summary>
         /// Installed LicenseKey
         /// </summary>
-        public static string LicenseKey { 
-            get 
+        public static string LicenseKey
+        {
+            get
             {
                 if (InstallationFound == false) { return ""; }
                 else
                 {
-                    if (_InstallationFile == null) 
-                    { 
+                    if (_InstallationFile == null)
+                    {
                         ACT.Core.ACT_Class_Core.ConditionalLogError("ACT.Core.SystemStatus.LicenseKey", null, Enums.ErrorLevel.Severe, "Missing Installation File Object When Installatioon Found = true");
                         return "";
                     }
@@ -163,7 +193,7 @@ namespace ACT.Core
                         return _InstallationFile.Installation.LicenseKey;
                     }
                 }
-            } 
+            }
         }
 
         /// <summary>
@@ -201,7 +231,7 @@ namespace ACT.Core
         /// <returns></returns>
         public static string LocateInstallation(bool ForceReload = false)
         {
-            
+
             if (_InstallationFound == true && ForceReload == false) { return InstallPath; }
 
             if (ACTConstants.SystemConfiguration.InstallationDirectory(AppDomain.CurrentDomain.BaseDirectory.EnsureDirectoryFormat()) == null) { return ""; }
@@ -310,10 +340,10 @@ namespace ACT.Core
         {
             string _CurrentVersion = AssemblyName.GetAssemblyName("ACTCore.dll").Version.ToString().Replace(".", "-");
 
-            string _VersionResult = ACT.Core.Communications.Http.CallGenericHandler_StringReturn("http://services.act-net.us/sysconfig/" + _CurrentVersion + ".enc",null);
+            string _VersionResult = ACT.Core.Communications.Http.CallGenericHandler_StringReturn("http://services.act-net.us/sysconfig/" + _CurrentVersion + ".enc", null);
 
             Types.SystemConfiguration.SystemConfiguration _StandardConfig = Types.SystemConfiguration.SystemConfiguration.FromJson(_VersionResult.DecryptString());
-            
+
             return _StandardConfig;
         }
 
