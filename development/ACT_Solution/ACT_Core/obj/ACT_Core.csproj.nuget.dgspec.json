@@ -28,10 +28,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "E:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
-          "H:\\Program Files (x86)\\DevExpress 19.1\\Components\\System\\Components\\Packages": {},
-          "H:\\Program Files (x86)\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/StonegateIQ/30de5c5c-c831-4e4f-9cc0-459a0f75cc4d/_packaging/ACT_FEED/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
@@ -46,6 +43,92 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[5.3.1, )"
+            },
+            "Microsoft.Extensions.Primitives": {
+              "target": "Package",
+              "version": "[3.1.7, )"
+            },
+            "Microsoft.Win32.Primitives": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "Microsoft.Win32.Registry": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "Microsoft.Win32.Registry.AccessControl": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "Microsoft.Win32.SystemEvents": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "Pluralize.NET.Core": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.2, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.Drawing.Primitives": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.IO": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.IO.FileSystem": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.IO.FileSystem.AccessControl": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.Runtime": {
+              "target": "Package",
+              "version": "[4.3.1, )"
+            },
+            "System.Runtime.InteropServices.RuntimeInformation": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Runtime.Serialization.Primitives": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Security.Cryptography.Algorithms": {
+              "target": "Package",
+              "version": "[4.3.1, )"
+            },
+            "System.Security.Cryptography.Primitives": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Security.Cryptography.ProtectedData": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.ServiceModel.Primitives": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

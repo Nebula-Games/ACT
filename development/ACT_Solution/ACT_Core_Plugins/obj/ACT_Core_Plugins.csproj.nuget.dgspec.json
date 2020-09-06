@@ -1,0 +1,288 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core_Plugins\\ACT_Core_Plugins.csproj": {}
+  },
+  "projects": {
+    "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj",
+        "projectName": "ACT_Core",
+        "projectPath": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj",
+        "packagesPath": "C:\\Users\\MarkAlicz.GAMERSGATHER\\.nuget\\packages\\",
+        "outputPath": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "H:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\MarkAlicz.GAMERSGATHER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "E:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[5.3.1, )"
+            },
+            "Microsoft.Extensions.Primitives": {
+              "target": "Package",
+              "version": "[3.1.7, )"
+            },
+            "Microsoft.Win32.Primitives": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "Microsoft.Win32.Registry": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "Microsoft.Win32.Registry.AccessControl": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "Microsoft.Win32.SystemEvents": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "Pluralize.NET.Core": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.2, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.Drawing.Primitives": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.IO": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.IO.FileSystem": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.IO.FileSystem.AccessControl": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.Runtime": {
+              "target": "Package",
+              "version": "[4.3.1, )"
+            },
+            "System.Runtime.InteropServices.RuntimeInformation": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Runtime.Serialization.Primitives": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Security.Cryptography.Algorithms": {
+              "target": "Package",
+              "version": "[4.3.1, )"
+            },
+            "System.Security.Cryptography.Primitives": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Security.Cryptography.ProtectedData": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.ServiceModel.Primitives": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core_Plugins\\ACT_Core_Plugins.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core_Plugins\\ACT_Core_Plugins.csproj",
+        "projectName": "ACT_Core_Plugins",
+        "projectPath": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core_Plugins\\ACT_Core_Plugins.csproj",
+        "packagesPath": "C:\\Users\\MarkAlicz.GAMERSGATHER\\.nuget\\packages\\",
+        "outputPath": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core_Plugins\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "H:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\MarkAlicz.GAMERSGATHER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "E:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj": {
+                "projectPath": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[5.3.1, )"
+            },
+            "Microsoft.Extensions.Primitives": {
+              "target": "Package",
+              "version": "[3.1.7, )"
+            },
+            "Microsoft.Win32.Primitives": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "Microsoft.Win32.Registry": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "Microsoft.Win32.Registry.AccessControl": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "Microsoft.Win32.SystemEvents": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "Pluralize.NET.Core": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.2, )"
+            },
+            "System.IO": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.IO.FileSystem": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.IO.FileSystem.AccessControl": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.Runtime": {
+              "target": "Package",
+              "version": "[4.3.1, )"
+            },
+            "System.Runtime.InteropServices.RuntimeInformation": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Runtime.Serialization.Primitives": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Security.Cryptography.Algorithms": {
+              "target": "Package",
+              "version": "[4.3.1, )"
+            },
+            "System.Security.Cryptography.Primitives": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Security.Cryptography.ProtectedData": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.ServiceModel.Primitives": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\ACT_Core_TestConsole.exe
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\ACT_Core_TestConsole.deps.json
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\ACT_Core_TestConsole.runtimeconfig.json
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\ACT_Core_TestConsole.runtimeconfig.dev.json
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\ACT_Core_TestConsole.dll
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\ACT_Core_TestConsole.pdb
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\obj\Debug\netcoreapp3.1\ACT_Core_TestConsole.csprojAssemblyReference.cache
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\obj\Debug\netcoreapp3.1\ACT_Core_TestConsole.AssemblyInfoInputs.cache
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\obj\Debug\netcoreapp3.1\ACT_Core_TestConsole.AssemblyInfo.cs
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\obj\Debug\netcoreapp3.1\ACT_Core_TestConsole.csproj.CoreCompileInputs.cache
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\obj\Debug\netcoreapp3.1\ACT_Core_TestConsole.dll
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\obj\Debug\netcoreapp3.1\ACT_Core_TestConsole.pdb
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\obj\Debug\netcoreapp3.1\ACT_Core_TestConsole.genruntimeconfig.cache

@@ -1,0 +1,1019 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Text;
+using ACT.Core.Extensions;
+using ACT.Core.CustomAttributes;
+
+namespace ACT.Core.Web
+{
+    public class TemplateData
+    {
+        public string BaseDirectory;
+        public string TemplateType;
+        public List<Template> Templates = new List<Template>();
+    }
+
+    public class Template
+    {
+        public string BaseDirectory;
+        public string TemplateType;
+
+        public string FileName;
+        public string TemplateData;
+    }
+
+    [ACTRequired_SystemSetting(RequiredConfigurationValue = new string[] { "TemplateEngine_ConnectionString", "TemplateEngine_Schema", "TemplateEngine_Current_Version" })]
+    public static class TemplateEngine
+    {
+        public static event ACT.Core.Delegates.OnCommunication CommunicationEvent;
+
+        public static void GetAllData(System.Web.UI.Page MainPage)
+        {
+
+        }
+        /// <summary> Allows Values To Be Parsed Using ACT Notation #VARIABLE#.  
+        ///           Session = SES- 
+        ///           Querystring = QES-  
+        ///           Example: "/login/default.aspx?LoginID=#SES-LoginID# 
+        ///             would be like "/login/default.aspx?LoginID=" + Session["LoginID"].ToString()
+        /// </summary>
+        ///
+        /// <value> The navigation URL. </value>
+        public static string SimpleParse(string InputString, System.Web.SessionState.HttpSessionState SessionState, System.Collections.Specialized.NameValueCollection QueryStringData)
+        {
+            string _InputString = InputString;
+
+            int _SearchIndex = -1;
+
+            try
+            {
+                _SearchIndex = _InputString.IndexOf("#SES-");
+
+                while (_SearchIndex > -1)
+                {
+                    int _EndIndex = _InputString.IndexOf("#", _SearchIndex + 5);
+                    string _SessionVarName = _InputString.Substring(_SearchIndex + 5, _EndIndex - _SearchIndex - 5);
+                    _InputString = _InputString.Replace("#SES-" + _SessionVarName + "#", SessionState[_SessionVarName].ToString());
+                    _SearchIndex = _InputString.IndexOf("#SES-");
+                }
+            }
+            catch { }
+
+            try
+            {
+                _SearchIndex = _InputString.IndexOf("#QES-");
+
+                while (_SearchIndex > -1)
+                {
+                    int _EndIndex = _InputString.IndexOf("#", _SearchIndex + 5);
+                    string _QueryStringVarName = _InputString.Substring(_SearchIndex + 5, _EndIndex - _SearchIndex - 5);
+                    _InputString = _InputString.Replace("#QES-" + _QueryStringVarName + "#", QueryStringData[_QueryStringVarName]);
+                    _SearchIndex = _InputString.IndexOf("#QES-");
+                }
+            }
+            catch { }
+
+            return _InputString;
+        }
+
+        /// <summary>
+        /// All The Template Data Loaded Into Memory
+        /// </summary>
+        public static List<TemplateData> AllTemplateData = new List<TemplateData>();
+
+        internal static string _ConnectionName;
+        internal static string _BaseDirectory;
+
+        #region Database Methods
+
+        /// <summary>
+        /// Init The Template Manager For Database Usage
+        /// </summary>
+        /// <param name="DBConnectionName"></param>
+        /// <param name="BaseDirectory"></param>
+        /// <param name="ForceReload"></param>
+        /// <param name="UserDefinedDB"></param>
+        public static void InitTemplateManagerDB(string DBConnectionName, string BaseDirectory, bool ForceReload)
+        {
+            _ConnectionName = DBConnectionName;
+            _BaseDirectory = BaseDirectory;
+
+            if (AllTemplateData.Count() == 0)
+            {
+                ForceReload = true;
+            }
+
+            if (ForceReload)
+            {
+                UpdateDatabase(DBConnectionName, BaseDirectory);
+
+                AllTemplateData.Clear();
+
+                var _DataAccess = ACT.Core.CurrentCore<ACT.Core.Interfaces.DataAccess.I_DataAccess>.GetCurrent();
+                string _ConnString = ACT.Core.SystemSettings.GetSettingByName(DBConnectionName).Value;
+
+                _DataAccess.Open(_ConnString);
+
+                var _Results = _DataAccess.RunCommand("TEMPLATES_WEB_GETALL", new List<System.Data.IDataParameter>(), true, System.Data.CommandType.StoredProcedure);
+
+                if (_Results.FirstQueryHasExceptions == true)
+                {
+                    ACT.Core.Helper.ErrorLogger.LogError(null, "Error Getting Web Templates From Database", _Results.Exceptions[0], Enums.ErrorLevel.Warning);
+                }
+
+                AllTemplateData = new List<TemplateData>();
+
+                foreach (System.Data.DataRow DR in _Results.FirstDataTable_WithRows().Rows)
+                {
+                    if (AllTemplateData.Where(x => x.TemplateType == DR["TypeName"].ToString()).Count() == 0)
+                    {
+                        TemplateData _TD = new TemplateData();
+                        _TD.Templates = new List<Template>();
+                        _TD.BaseDirectory = BaseDirectory;
+                        _TD.TemplateType = DR["TypeName"].ToString();
+                        AllTemplateData.Add(_TD);
+                    }
+
+                    var _NewT = new Template();
+                    _NewT.BaseDirectory = DR["BaseDirectory"].ToString();
+                    _NewT.FileName = DR["Name"].ToString();
+                    _NewT.TemplateData = DR["Data"].ToString();
+                    _NewT.TemplateType = DR["TypeName"].ToString();
+                    AllTemplateData.Where(x => x.TemplateType == DR["TypeName"].ToString()).First().Templates.Add(_NewT);
+                }
+
+                _DataAccess.Dispose();
+            }
+        }
+
+        public static string DBConnection
+        {
+            get
+            {
+                try { return SystemSettings.GetSettingByName("TemplateEngine_ConnectionString").Value; }
+                catch
+                {
+                    try { return SystemSettings.GetSettingByName("Template_ConnectionString").Value; }
+                    catch { return ""; }
+                }
+
+            }
+        }
+
+        public static string InstalledVersion;
+        public static string CurrentVersion;
+
+        /// <summary>
+        /// Is Template Engine - Installed
+        /// </summary>
+        /// <returns>(bool,bool)</returns>
+        public static (bool, bool) IsInstalled()
+        {
+            try
+            {
+                CommunicationEvent(new List<string>() { "Starting The Installation test." });
+                string _ConnString = DBConnection;
+
+                if (_ConnString.NullOrEmpty())
+                {
+                    CommunicationEvent(new List<string>() { "Connection String Is Not Found." });
+                    return (false, false);
+                }
+
+                CommunicationEvent(new List<string>() { "Connection String Found" });
+
+                var _DataAccess = ACT.Core.CurrentCore<ACT.Core.Interfaces.DataAccess.I_DataAccess>.GetCurrent();
+                _DataAccess.Open(_ConnString);
+
+                if (_DataAccess.Connected == false)
+                {
+                    CommunicationEvent(new List<string>() { "Error Connecting to The Database...." });
+                    return (false, false);
+                }
+                else
+                {
+                    CommunicationEvent(new List<string>() { "Database Is Connected...." });
+
+                }
+                try
+                {
+                    var _TemplateEngineVersion = ACT.Core.Configuration_Settings.GetResource("Web Templates", "INSTALLED_CHECK.txt");
+                    var _Results = _DataAccess.RunCommand(_TemplateEngineVersion, null, true, System.Data.CommandType.Text);
+                    InstalledVersion = _Results.FirstDataTable_WithRows().Rows[0]["Description"].ToString().Replace("Version ","");
+                    if (InstalledVersion.NullOrEmpty())
+                    {
+                        CommunicationEvent(new List<string>() { "Error Current Version not Found...." });
+                        return (false, false);
+                    }
+                    CurrentVersion = ACT.Core.SystemSettings.GetSettingByName("TemplateEngine_Current_Version").Value;
+                    if (CurrentVersion.NullOrEmpty())
+                    {
+                        CommunicationEvent(new List<string>() { "Error Version not Found...." });
+                        return (false, false);
+                    }
+
+                    if (InstalledVersion.Trim() == CurrentVersion.Trim())
+                    {
+                        CommunicationEvent(new List<string>() { "Current Version Is Installed" });
+                        return (true, true);
+                    }
+                    else
+                    {
+                        CommunicationEvent(new List<string>() { "Depreciated Version Is Installed." });
+                        return (true, false);
+                    }
+                }
+                catch
+                {
+                    CommunicationEvent(new List<string>() { "An Unknown Error Occurred.. Please Check The Logs.." });
+                    return (false, false);
+                }
+            }
+            catch
+            {
+                CommunicationEvent(new List<string>() { "An Unknown Error Occurred.. Please Check The Logs.." });
+                return (false, false);
+            }
+
+        }
+
+        /// <summary>
+        /// Uninstall the ACT Web Template Features
+        /// </summary>
+        /// <returns></returns>
+        public static bool UnInstall()
+        {
+            try
+            {
+                CommunicationEvent(new List<string>() { "Trying To Uninstall.." });
+                if (DBConnection == "")
+                {
+
+                    CommunicationEvent(new List<string>() { "DB Connection Not Found.." });
+                    return false;
+                }
+
+                CommunicationEvent(new List<string>() { "Locating the Uninstall Script.." });
+                string _UninstallScript = ACT.Core.Configuration_Settings.GetResource("Web Templates", "UNINSTALL.txt");
+
+                if (_UninstallScript.NullOrEmpty())
+                {
+                    CommunicationEvent(new List<string>() { "Uninstall Script Not Found.." });
+                    return false;
+                }
+
+                ACT.Core.Interfaces.DataAccess.I_DataAccess _DataAccess = ACT.Core.CurrentCore<Interfaces.DataAccess.I_DataAccess>.GetCurrent();
+
+                _DataAccess.Open(DBConnection);
+                CommunicationEvent(new List<string>() { "Opening the Database.." });
+                if (_DataAccess.Connected == false)
+                {
+                    CommunicationEvent(new List<string>() { "Database Open Failed.." });
+                    return false;
+                }
+
+                CommunicationEvent(new List<string>() { "Running The Uninstall Scripts" });
+                foreach (var scrpt in _UninstallScript.SplitString("###GOSTATEMENT###", StringSplitOptions.RemoveEmptyEntries))
+                {
+                    _DataAccess.RunCommand(scrpt, null, false, System.Data.CommandType.Text);
+                    CommunicationEvent(new List<string>() { "Script Run" });
+                }
+
+                return true;
+            }
+            catch { return false; }
+        }
+
+        /// <summary>
+        /// Install the ACT
+        /// </summary>
+        /// <returns></returns>
+        public static bool Install()
+        {
+            if (DBConnection == "") { return false; }
+
+            string _SchemaSettings = ACT.Core.SystemSettings.GetSettingByName("TemplateEngine_Schema").Value;
+            CommunicationEvent(new List<string>() { "Getting Template Engine Schema..." });
+
+            if (_SchemaSettings == "")
+            {
+                CommunicationEvent(new List<string>() { "Template Engine Schema is Empty." });
+                return false;
+            }
+
+            ACT.Core.Interfaces.DataAccess.I_DataAccess _DataAccess = ACT.Core.CurrentCore<Interfaces.DataAccess.I_DataAccess>.GetCurrent();
+            _DataAccess.Open(DBConnection);
+
+            CommunicationEvent(new List<string>() { "Open the Connection." });
+
+            if (_DataAccess.Connected == false)
+            {
+                CommunicationEvent(new List<string>() { "Connection Failed To Open." });
+                return false;
+            }
+
+            var _DBSchema = ACT.Core.Types.ACTConfig.ACT_Template_DB_Schema.FromJson(_SchemaSettings);
+
+            CommunicationEvent(new List<string>() { "Starting Schema Creation" });
+
+            foreach (var tbl in _DBSchema.Tables)
+            {
+
+                string _tbldata = ACT.Core.Configuration_Settings.GetResource("Web Templates", tbl);
+                foreach (string statement in _tbldata.SplitString("###GOSTATEMENT###", StringSplitOptions.RemoveEmptyEntries))
+                {
+                    _DataAccess.RunCommand(statement, null, false, System.Data.CommandType.Text);
+                    CommunicationEvent(new List<string>() { "Table Created.." });
+                }
+            }
+            foreach (var proc in _DBSchema.Procedures)
+            {
+                string _procdata = ACT.Core.Configuration_Settings.GetResource("Web Templates", proc);
+                foreach (string statement in _procdata.SplitString("###GOSTATEMENT###", StringSplitOptions.RemoveEmptyEntries))
+                {
+                    _DataAccess.RunCommand(statement, null, false, System.Data.CommandType.Text);
+                    CommunicationEvent(new List<string>() { "Proc Created.." });
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Updates The Database With The Latest Version Of The Templates
+        /// </summary>
+        /// <param name="DBConnectionName"></param>
+        /// <param name="BaseDirectory"></param>
+        public static void UpdateDatabase(string DBConnectionName, string BaseDirectory)
+        {
+            AllTemplateData.Clear();
+            var _BaseDirectories = System.IO.Directory.GetDirectories(BaseDirectory);
+            string _ConnString = ACT.Core.SystemSettings.GetSettingByName(DBConnectionName).Value;
+
+            foreach (string _SubType in _BaseDirectories)
+            {
+                foreach (string Name in System.IO.Directory.GetFiles(_SubType.EnsureDirectoryFormat()))
+                {
+                    List<System.Data.SqlClient.SqlParameter> _Params = new List<System.Data.SqlClient.SqlParameter>();
+                    _Params.Add(new System.Data.SqlClient.SqlParameter("Name", Name.GetFileNameFromFullPath()));
+                    _Params.Add(new System.Data.SqlClient.SqlParameter("TypeName", _SubType.Substring(_SubType.LastIndexOf("\\") + 1)));
+                    _Params.Add(new System.Data.SqlClient.SqlParameter("BaseDirectory", BaseDirectory.EnsureDirectoryFormat()));
+                    _Params.Add(new System.Data.SqlClient.SqlParameter("Data", System.IO.File.ReadAllText(Name)));
+
+                    var _DataAccess = ACT.Core.CurrentCore<ACT.Core.Interfaces.DataAccess.I_DataAccess>.GetCurrent();
+                    _DataAccess.Open(_ConnString);
+
+                    var _Results = _DataAccess.RunCommand("TEMPLATE_WEB_ADDUPDATE", _Params.ToList<System.Data.IDataParameter>(), false, System.Data.CommandType.StoredProcedure);
+
+                    if (_Results.FirstQueryHasExceptions == true)
+                    {
+                        ACT.Core.Helper.ErrorLogger.LogError(null, "Error Adding Web Template To Database", _Results.Exceptions[0], Enums.ErrorLevel.Warning);
+                    }
+                    _DataAccess.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the template data from the Database Connection Name
+        /// </summary>
+        /// <param name="DBConnectionName"></param>
+        /// <param name="SubType"></param>
+        /// <param name="Name"></param>
+        /// <param name="Version"></param>
+        /// <returns></returns>
+        public static Template GetTemplateDataDB(string DBConnectionName, string SubType, string Name, int Version = 0)
+        {
+            var _AllCachedData = AllTemplateData.Where(x => x.TemplateType == SubType);
+
+            if (_AllCachedData == null)
+            {
+                TemplateData _New = new TemplateData();
+                _New.TemplateType = SubType;
+                _New.Templates = new List<Template>();
+                _New.BaseDirectory = DBConnectionName;
+
+                AllTemplateData.Add(_New);
+            }
+
+            var _CachedTemplateData = AllTemplateData.Where(x => x.TemplateType == SubType).FirstOrDefault();
+
+            if (_CachedTemplateData.Templates.Where(x => x.FileName == Name) == null)
+            {
+                string _ConnString = ACT.Core.SystemSettings.GetSettingByName(DBConnectionName).Value;
+
+                List<System.Data.SqlClient.SqlParameter> _Params = new List<System.Data.SqlClient.SqlParameter>();
+                _Params.Add(new System.Data.SqlClient.SqlParameter("Name", Name));
+                _Params.Add(new System.Data.SqlClient.SqlParameter("SubType", SubType));
+                _Params.Add(new System.Data.SqlClient.SqlParameter("VersionNumber", Version));
+
+                var _DataAccess = ACT.Core.CurrentCore<ACT.Core.Interfaces.DataAccess.I_DataAccess>.GetCurrent();
+                _DataAccess.Open(_ConnString);
+
+                var _Results = _DataAccess.RunCommand("ACT_GET_WEB_TEMPLATE", _Params.ToList<System.Data.IDataParameter>(), true, System.Data.CommandType.StoredProcedure);
+
+                if (_Results.FirstQueryHasExceptions == true) { return null; }
+                if (_Results.FirstDataTable_WithRows() == null) { return null; }
+                _DataAccess.Dispose();
+                _DataAccess = null;
+
+                var _NewTemplate = new Template() { BaseDirectory = _Results.GetValue("BaseDirectory").ToString(), FileName = _Results.GetValue("Name").ToString(), TemplateData = _Results.GetValue("Data").ToString(), TemplateType = _Results.GetValue("TypeName").ToString() };
+
+                _CachedTemplateData.Templates.Add(_NewTemplate);
+            }
+
+            return _CachedTemplateData.Templates.Where(x => x.FileName == Name).First();
+        }
+
+        /// <summary>
+        /// TESTS For ACT Integration Status
+        /// </summary>
+        /// <param name="ConnectionName"></param>
+        /// <returns></returns>
+        public static bool TestACTIntegration(string ConnectionName)
+        {
+            var _CurrentDataAccess = ACT.Core.CurrentCore<ACT.Core.Interfaces.DataAccess.I_DataAccess>.GetCurrent();
+            string _ConnectionString = ACT.Core.SystemSettings.GetSettingByName(ConnectionName).Value;
+
+            if (_CurrentDataAccess.Open(_ConnectionString) == false)
+            {
+                throw new Exception("Error Opening Database.");
+            }
+
+            var _Results = _CurrentDataAccess.RunCommand("Select * From ACT_FEATURES", new List<System.Data.IDataParameter>(), true, System.Data.CommandType.Text);
+
+            if (_Results.Exceptions[0] != null) { _CurrentDataAccess.Dispose(); return false; }
+            else
+            {
+                if (_Results.FirstDataTable_WithRows() != null)
+                {
+                    if (_Results.FirstDataTable_WithRows().Rows.Count == 1)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// Deploy the database and Stored Procedures
+        /// </summary>
+        /// <param name="ConnectionName"></param>
+        /// <param name="DropAndRecreate"></param>
+        /// <returns></returns>
+        public static bool DeployDatabase(string ConnectionName, bool DropAndRecreate)
+        {
+            string _CreateCommand = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory.EnsureDirectoryFormat() + "Data\\WebTemplatesSCHEMA.txt");
+            string _ProcA = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory.EnsureDirectoryFormat() + "Data\\ACT_GET_WEB_TEMPLATE.txt");
+            string _ProcB = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory.EnsureDirectoryFormat() + "Data\\TEMPLATE_WEB_ADDUPDATE.txt");
+
+
+            string[] _CreateCommands = _CreateCommand.SplitString("###GOSTATEMENT###", StringSplitOptions.RemoveEmptyEntries);
+
+            var _CurrentDataAccess = ACT.Core.CurrentCore<ACT.Core.Interfaces.DataAccess.I_DataAccess>.GetCurrent();
+            string _ConnectionString = ACT.Core.SystemSettings.GetSettingByName(ConnectionName).Value;
+
+            if (_CurrentDataAccess.Open(_ConnectionString) == false)
+            {
+                throw new Exception("Error Opening Database.");
+            }
+
+            for (int x = 0; x < _CreateCommands.Length; x++)
+            {
+                _CurrentDataAccess.RunCommand(_CreateCommands[x], new List<System.Data.IDataParameter>(), false, System.Data.CommandType.Text);
+            }
+
+            _CurrentDataAccess.RunCommand(_ProcA, new List<System.Data.IDataParameter>(), false, System.Data.CommandType.Text);
+            _CurrentDataAccess.RunCommand(_ProcB, new List<System.Data.IDataParameter>(), false, System.Data.CommandType.Text);
+
+            _CurrentDataAccess.Dispose();
+            return false;
+
+        }
+
+        #endregion
+
+        /// <summary>
+        /// This configures the template manager to be used with a website. 
+        /// </summary>
+        /// <param name="BaseDirectory">Physical Path To Template Directory</param>
+        /// <param name="TemplateType">Sub Directory Name Under Template Directory.</param>
+        public static void InitTemplateManager(string BaseDirectory, string TemplateType, bool ForceReload = false)
+        {
+            _BaseDirectory = BaseDirectory;
+
+            if (AllTemplateData.Where(x => x.BaseDirectory == BaseDirectory && x.TemplateType == TemplateType).Count() > 0)
+            {
+                if (ForceReload == false)
+                {
+                    return;
+                }
+            }
+
+            if (System.IO.Directory.Exists(BaseDirectory) == false)
+            {
+                throw new System.IO.FileNotFoundException("Error Locating Base Directory");
+            }
+
+            if (System.IO.Directory.Exists(BaseDirectory.EnsureDirectoryFormat() + TemplateType) == false)
+            {
+                throw new System.IO.FileNotFoundException("Error Locating Template Type Directory");
+            }
+
+            if (AllTemplateData.Where(x => x.BaseDirectory == BaseDirectory && x.TemplateType == TemplateType).Count() > 0)
+            {
+                foreach (var template in AllTemplateData.Where(x => x.BaseDirectory == BaseDirectory && x.TemplateType == TemplateType))
+                {
+                    foreach (var tmplate in template.Templates)
+                    {
+                        var _ReadAllText = System.IO.File.ReadAllText(BaseDirectory.EnsureDirectoryFormat() + TemplateType + "\\" + tmplate.FileName);
+                        tmplate.TemplateData = _ReadAllText;
+                    }
+                }
+            }
+            else
+            {
+                AddTemplateData(BaseDirectory, TemplateType);
+            }
+
+        }
+
+        /// <summary>
+        /// LOCAL CACHE ONLY
+        /// </summary>
+        /// <param name="BaseDirectory"></param>
+        /// <param name="TemplateType"></param>
+        /// <returns></returns>
+        internal static TemplateData AddTemplateData(string BaseDirectory, string TemplateType)
+        {
+            TemplateData _New = new TemplateData();
+            _New.TemplateType = TemplateType;
+            _New.BaseDirectory = BaseDirectory;
+            _New.Templates = new List<Template>();
+
+            AllTemplateData.Add(_New);
+            return _New;
+        }
+
+        //public static Template GetTemplateData(string BaseDirectory, string TemplateType, string TemplateName, bool ForceReload = false)
+        //{
+        //    if (AllTemplateData.Where(x => x.BaseDirectory == BaseDirectory && x.TemplateType == TemplateType).Count() > 0)
+        //    {
+        //        var _TemplateData = AllTemplateData.Where(x => x.BaseDirectory == BaseDirectory && x.TemplateType == TemplateType).First();
+
+        //        if (_TemplateData.Templates.Where(x => x.FileName == TemplateName).Count() > 0)
+        //        {
+        //            if (ForceReload == false)
+        //            {
+        //                return _TemplateData.Templates.Where(x => x.FileName == TemplateName).First();
+        //            }
+        //            else
+        //            {
+        //                string _RawTemplateData = System.IO.File.ReadAllText(BaseDirectory.EnsureDirectoryFormat() + TemplateType + "\\" + TemplateName.EnsureEndsWith(".html"));
+        //                _TemplateData.Templates.Where(x => x.FileName == TemplateName).First().TemplateData = _RawTemplateData;
+        //                return _TemplateData.Templates.Where(x => x.FileName == TemplateName).First();
+        //            }
+        //        }
+        //        else
+        //        {
+        //            var _NewTemplate = new Template();
+        //            _NewTemplate.FileName = TemplateName;
+        //            _NewTemplate.BaseDirectory = BaseDirectory;
+        //            _NewTemplate.TemplateType = TemplateType;
+        //            string _RawTemplateData = System.IO.File.ReadAllText(BaseDirectory.EnsureDirectoryFormat() + TemplateType + "\\" + TemplateName.EnsureEndsWith(".html"));
+        //            _NewTemplate.TemplateData = _RawTemplateData;
+        //            _TemplateData.Templates.Add(_NewTemplate);
+        //            return _NewTemplate;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        var _TemplateData = AddTemplateData(BaseDirectory, TemplateType);
+        //        var _NewTemplate = new Template();
+        //        _NewTemplate.FileName = TemplateName;
+        //        _NewTemplate.BaseDirectory = BaseDirectory;
+        //        _NewTemplate.TemplateType = TemplateType;
+        //        string _RawTemplateData = System.IO.File.ReadAllText(BaseDirectory.EnsureDirectoryFormat() + TemplateType + "\\" + TemplateName.EnsureEndsWith(".html"));
+        //        _NewTemplate.TemplateData = _RawTemplateData;
+        //        _TemplateData.Templates.Add(_NewTemplate);
+        //        return _NewTemplate;
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Gets the template data from the CACHE
+        ///// </summary>
+        ///// <param name="SubType"></param>
+        ///// <param name="Name"></param>
+        ///// <returns></returns>
+        //public static Template GetTemplateData(string SubType, string Name)
+        //{
+        //    try
+        //    {
+        //        return AllTemplateData.Where(x => x.TemplateType == SubType).First().Templates.Where(x => x.FileName == Name).First();
+        //    }
+        //    catch
+        //    {
+        //        return null;
+        //    }
+        //}
+
+        /// <summary>
+        /// This processes a template executing replacement data
+        /// </summary>
+        /// <param name="TemplateClass">Template To Process</param>
+        /// <param name="DR">Current DataRow To Process</param>
+        /// <param name="QueryStringData">QueryString Data</param>
+        /// <param name="SessionData">Session Data</param>
+        /// <returns>Parsed Template</returns>
+        public static string ParseTemplate(Template TemplateClass, Dictionary<string, string> DR, NameValueCollection QueryStringData, Dictionary<string, string> SessionData)
+        {
+            List<Dictionary<string, string>> _TmpList = new List<Dictionary<string, string>>();
+            _TmpList.Add(DR);
+            var _DT = _TmpList.ToDataTable();
+            return ParseTemplate(TemplateClass, _DT.Rows[0], _DT.Columns, QueryStringData, SessionData);
+        }
+
+        /// <summary>
+        /// A TEMPLATE REPLACEMENT CAN BE ONE OF THE FOLLOWING
+        ///     #COLUMNNAME# - Direct Replacement For a Column Name in the DR Passed To IT
+        ///     #PARSEFILE_FILENAME_(STOREDPROC|DATAROW)_PARAMA,PARAMB,PARAMC
+        /// </summary>
+        /// <param name="TemplateClass"></param>
+        /// <param name="DR"></param>
+        /// <param name="DC"></param>
+        /// <returns></returns>
+        public static string ParseTemplate(Template TemplateClass, System.Data.DataRow DR, System.Data.DataColumnCollection DC, NameValueCollection QueryStringData, Dictionary<string, string> SessionData)
+        {
+            string _TempReturn = "";
+            _TempReturn = TemplateClass.TemplateData;
+            _TempReturn = ProcessReplacementLogicMany(_TempReturn, TemplateClass, DR, DC, QueryStringData, SessionData);
+            return _TempReturn;
+        }
+
+        internal static string ProcessReplacementLogicMany(string TemplateData, Template TemplateClass, System.Data.DataRow DR, System.Data.DataColumnCollection DC, NameValueCollection QueryStringData, Dictionary<string, string> SessionData)
+        {
+            string _TempReturn = TemplateData;
+            /// REPLACE ALL THE DIRECT COLUMN NAMES
+            foreach (System.Data.DataColumn DCN in DC)
+            {
+                _TempReturn = _TempReturn.Replace("###" + DCN.ColumnName.ToUpper() + "###", DR[DCN.ColumnName].ToString());
+            }
+
+            // FIND ANY OTHER TEMPLATE PARTS
+            int IndexPos = _TempReturn.IndexOf("###");
+
+            while (IndexPos > 0)
+            {
+                // FIND OTHER REPLACEMENT CODES LOOK FOR END POUNDS
+                int EndPos = _TempReturn.IndexOf("###", IndexPos + 3);
+                // EXIT IF NO END POUNDS FOUND
+                if (EndPos == -1) { break; }
+                string _ReplacementName = _TempReturn.Substring(IndexPos, EndPos - IndexPos);
+
+                // CALCULATE REPLACEMENT NAME WITHOUT ### STATEMENTS
+                _ReplacementName = _ReplacementName.Replace("###", "");
+                // PROCESS REPLACEMENTS USING REPLACEMENT LOGIC METHOD
+                IndexPos = ProcessReplacementLogic(TemplateClass, _ReplacementName, ref _TempReturn, DR, DC, QueryStringData, SessionData);
+            }
+
+            return _TempReturn;
+        }
+
+        /// <summary>
+        /// Parses The Stored Proc 
+        /// </summary>
+        /// <param name="_ReplacementName"></param>
+        /// <param name="BaseDirectory"></param>
+        /// <param name="TemplateType"></param>
+        /// <param name="DR"></param>
+        /// <returns></returns>
+        internal static string ParseStoredProc(Template TemplateClass, string _ReplacementName, string BaseDirectory, string TemplateType, System.Data.DataRow DR, System.Data.DataColumnCollection DC, NameValueCollection QueryStringData, Dictionary<string, string> SessionData)
+        {
+            //             REPLACEMENT NAME ! TEMPLATE NAME ! DB PROCESS ! (STORED PROC NAME|SQL STATEMENT) ! SQL PARAMETERS (Comma Seperated)    
+            // EXAMPLE: ###PARSEFILE!TestSurveyCategories!STOREDPROC!sp_EDIT_SURVEY_GET_CATEGORIES!@ClientID=CLIENT_ID,IsSTAMP=1,@Industry_ID=Industry_ID###
+
+            string _TmpReturn = "";
+
+            // EXECUTE STORED PROC AS DEFINED
+            // GET STORED PROC REPLACEMENT DATA ! is THE SEPERATOR
+            var _Replacements = _ReplacementName.SplitString("!", StringSplitOptions.RemoveEmptyEntries);
+
+            // TEMPLATE NAME FROM DEFINED STORED PROCEDURE LINE
+            string _TemplateName = _Replacements[1];
+            string _DBProcess = _Replacements[2];
+            string _DBCommand = _Replacements[3];
+            string _DBParameters = _Replacements[4];
+
+            // GET THE SUB TEMPLATE FROM THE TEMPLATENAME AND BASE DIRECTORY
+            string _SubTemplate = GetTemplateDataDB(_ConnectionName, TemplateType, _TemplateName, 0).TemplateData;
+
+            // IF THE REPLACEMENT IS A STORED PROCEDURE RUN CODE
+            if (_Replacements[2] == "STOREDPROC")
+            {
+                // GET STORED PROCEDURE PARAMETERS
+                string[] _Params = _DBParameters.SplitString(",", StringSplitOptions.RemoveEmptyEntries);
+                List<System.Data.IDataParameter> _ProcParams = new List<System.Data.IDataParameter>();
+
+                //REPLACE STORED PROCEDURE PARAMETERS WITH VALUES
+                #region Param Values
+                foreach (string param in _Params)
+                {
+                    string[] paramvalues = param.SplitString("=", StringSplitOptions.RemoveEmptyEntries);
+                    if (paramvalues[1].StartsWith("QUERYSTRINGENC"))
+                    {
+                        _ProcParams.Add(new System.Data.SqlClient.SqlParameter(paramvalues[0], QueryStringData[paramvalues[1].Replace("QUERYSTRINGENC", "")].DecryptString(SystemSetting.GENERICPASSWORD)));
+                    }
+                    else if (paramvalues[1].StartsWith("QUERYSTRING"))
+                    {
+                        _ProcParams.Add(new System.Data.SqlClient.SqlParameter(paramvalues[0], QueryStringData[paramvalues[1].Replace("QUERYSTRING", "")]));
+                    }
+                    else if (paramvalues[1].StartsWith("SESSION"))
+                    {
+                        _ProcParams.Add(new System.Data.SqlClient.SqlParameter(paramvalues[0], SessionData[paramvalues[1].Replace("SESSION", "")]));
+                    }
+                    else if (paramvalues[1].StartsWith("INT"))
+                    {
+                        _ProcParams.Add(new System.Data.SqlClient.SqlParameter(paramvalues[0], paramvalues[1].Replace("INT", "").ToInt()));
+                    }
+                    else if (paramvalues[1].StartsWith("BOOL"))
+                    {
+                        if (paramvalues[1].Replace("BOOL", "").ToUpper() == "TRUE")
+                        {
+                            _ProcParams.Add(new System.Data.SqlClient.SqlParameter(paramvalues[0], true));
+                        }
+                        else
+                        {
+                            _ProcParams.Add(new System.Data.SqlClient.SqlParameter(paramvalues[0], false));
+                        }
+                    }
+                    else if (paramvalues[1].StartsWith("STR"))
+                    {
+                        _ProcParams.Add(new System.Data.SqlClient.SqlParameter(paramvalues[0], paramvalues[1].Replace("STR", "")));
+                    }
+                    else
+                    {
+                        _ProcParams.Add(new System.Data.SqlClient.SqlParameter(paramvalues[0], DR[paramvalues[1]]));
+                    }
+                }
+                #endregion
+
+                ACT.Core.Interfaces.DataAccess.I_DataAccess _CurrentDataAccess = ACT.Core.CurrentCore<ACT.Core.Interfaces.DataAccess.I_DataAccess>.GetCurrent();
+                string _ConnString = ACT.Core.SystemSettings.GetSettingByName(_ConnectionName).Value;
+                _CurrentDataAccess.Open(_ConnString);
+
+                /// EXECUTE THE STORED PROCEDURE CALLER
+                //StoneGate.STAMP.ACT_DB_Addons.EXEC_STORED_PROCEDURE(_DBCommand, _ProcParams);
+                var _ProcResults = _CurrentDataAccess.RunCommand(_DBCommand, _ProcParams, true, System.Data.CommandType.StoredProcedure);
+                _CurrentDataAccess.Dispose();
+                _CurrentDataAccess = null;
+
+                /// IF THE PROC RESULTS ARE NOT NULL
+                if (_ProcResults.FirstDataTable_WithRows() != null)
+                {
+                    string _SubText = "";
+
+                    foreach (System.Data.DataRow _DR in _ProcResults.FirstDataTable_WithRows().Rows)
+                    {
+                        string _TmpAddition = _SubTemplate;
+                        foreach (System.Data.DataColumn CName in _ProcResults.FirstDataTable_WithRows().Columns)
+                        {
+                            _TmpAddition = _TmpAddition.Replace("###" + CName.ColumnName.ToUpper() + "###", _DR[CName].ToString());
+                        }
+
+                        int IndexPos = _TmpAddition.IndexOf("###");
+                        while (IndexPos > 0)
+                        {
+                            // FIND OTHER REPLACEMENT CODES
+                            int EndPos = _TmpAddition.IndexOf("###", IndexPos + 3);
+                            if (EndPos == -1) { break; }
+                            string _ReplacementName2 = _TmpAddition.Substring(IndexPos, EndPos - IndexPos);
+
+                            _ReplacementName2 = _ReplacementName2.Replace("###", "");
+                            IndexPos = ProcessReplacementLogic(TemplateClass, _ReplacementName2, ref _TmpAddition, _DR, _ProcResults.FirstDataTable_WithRows().Columns, QueryStringData, SessionData);
+                        }
+
+                        _SubText += _TmpAddition;
+                    }
+                    _TmpReturn = _SubText;
+                }
+                else
+                {
+                    _TmpReturn = "";
+                    // TODO LOG ERROR
+                }
+            }
+
+            return _TmpReturn;
+        }
+
+        /// <summary>
+        /// Process Replacement LOGIC
+        /// </summary>
+        /// <param name="TemplateClass">Template Class Being Replaced</param>
+        /// <param name="ReplacementName">Replacment Name WITHOUT POOUNDS ###SOMEDATA### = SOMEDATA</param>
+        /// <param name="TemplateStringData">REF TO CURRENT OUTPUT DATA</param>
+        /// <param name="DR">DATA ROW</param>
+        /// <param name="QueryStringData">QUERYSTRING DATA</param>
+        /// <param name="SessionData">SESSION DATA</param>
+        /// <returns></returns>
+        internal static int ProcessReplacementLogic(Template TemplateClass, string ReplacementName, ref string TemplateStringData, System.Data.DataRow DR, System.Data.DataColumnCollection DC, NameValueCollection QueryStringData, Dictionary<string, string> SessionData)
+        {
+            //TODO MAKE THIS SHIT WORK  IMPORTANT
+            string _ReplacementName = ReplacementName;
+            int IndexPos = 0;
+
+            if (_ReplacementName.StartsWith("PARSEFILE"))
+            {
+                var _ParseFileDetails = _ReplacementName.SplitString("!", StringSplitOptions.RemoveEmptyEntries);
+                if (_ParseFileDetails[2] == "STOREDPROC")
+                {
+                    string _ProcParsed = ParseStoredProc(TemplateClass, _ReplacementName, TemplateClass.BaseDirectory, TemplateClass.TemplateType, DR, DC, QueryStringData, SessionData);
+                    TemplateStringData = TemplateStringData.Replace("###" + _ReplacementName + "###", _ProcParsed);
+                    IndexPos = TemplateStringData.IndexOf("###");
+                }
+                else if (_ParseFileDetails[2] == "STANDARD")
+                {
+                    Template _TemplateFile = GetTemplateDataDB(_ConnectionName, TemplateClass.TemplateType, _ParseFileDetails[1]);
+                    string _TemplateValue = ParseTemplate(_TemplateFile, DR, DC, QueryStringData, SessionData);
+                    TemplateStringData = TemplateStringData.Replace("###" + _ReplacementName + "###", _TemplateValue);
+                    IndexPos = TemplateStringData.IndexOf("###");
+                }
+            }
+            else if (_ReplacementName.StartsWith("QUERYSTRINGENC"))
+            {
+                string _Var = _ReplacementName.Replace("QUERYSTRINGENC", "");
+                TemplateStringData = TemplateStringData.Replace("###" + _ReplacementName + "###", QueryStringData[_Var].DecryptString());
+                IndexPos = TemplateStringData.IndexOf("###");
+            }
+            else if (_ReplacementName.StartsWith("QUERYSTRING"))
+            {
+                string _Var = _ReplacementName.Replace("QUERYSTRING", "");
+                TemplateStringData = TemplateStringData.Replace("###" + _ReplacementName + "###", QueryStringData[_Var]);
+                IndexPos = TemplateStringData.IndexOf("###");
+            }
+            else if (_ReplacementName.StartsWith("SESSION"))
+            {
+                string _Var = _ReplacementName.Replace("SESSION", "");
+                TemplateStringData = TemplateStringData.Replace("###" + _ReplacementName + "###", SessionData[_Var]);
+                IndexPos = TemplateStringData.IndexOf("###");
+            }
+            else if (_ReplacementName.StartsWith("CHECKBOXCHECKED"))
+            {
+                string _Var = _ReplacementName.Replace("CHECKBOXCHECKED", "");
+                if (DR[_Var].ToBool() != null)
+                {
+                    if (DR[_Var].ToBool().Value == true)
+                    {
+                        TemplateStringData = TemplateStringData.Replace("###" + _ReplacementName + "###", "checked");
+                    }
+                }
+                TemplateStringData = TemplateStringData.Replace("###" + _ReplacementName + "###", "");
+                IndexPos = TemplateStringData.IndexOf("###");
+            }
+            else if (_ReplacementName.StartsWith("IF"))
+            {
+                IndexPos = ProcessIFStatement(IndexPos, _ReplacementName, ref TemplateStringData, DR, DC, TemplateClass, QueryStringData, SessionData);
+            }
+            else
+            {
+                TemplateStringData = TemplateStringData.Replace("###" + _ReplacementName + "###", "");
+                IndexPos = TemplateStringData.IndexOf("###");
+            }
+
+            return IndexPos;
+        }
+
+        /// <summary>
+        /// PROCESS A DETECTED IF STATEMENT
+        /// </summary>
+        /// <param name="StartIndex">Starting Index Relative to TemplateStringData and Current IF Position</param>
+        /// <param name="ReplacementName">REPLACEMENT NAME (ONLY THINGS INBETWEEN ###IF xxxxx ### = xxxxx</param>
+        /// <param name="TemplateStringData">Current Template Data (Pass as Ref)</param>
+        /// <param name="DR">Current Data Row</param>
+        /// <returns>New Index Position</returns>
+        internal static int ProcessIFStatement(int StartIndex, string ReplacementName, ref string TemplateStringData, System.Data.DataRow DR, System.Data.DataColumnCollection DC, Template TemplateClass, NameValueCollection QueryStringData, Dictionary<string, string> SessionData)
+        {
+            //    ###IF CUSTOM=TRUE&&APPROVED=TRUE###
+            // GET Original Replacement For Length Reasons
+            string _OriginalReplacementName = "###" + ReplacementName + "###";
+            int _OriginalReplacementLineLength = _OriginalReplacementName.Length;
+            // Adjust the Start Index
+            StartIndex = TemplateStringData.IndexOf(_OriginalReplacementName);
+
+            // START OF END IF STATEMENT
+            int ENDIFData = TemplateStringData.IndexOf("###END IF###", StartIndex);
+
+            // GET REPLACEMENT NAME MINUS THE IF AND ## PURE EVAL DATA
+            string _NewReplacementName = ReplacementName.Replace("IF ", "").Trim();
+
+            /// GET The IF Condition Data
+            string _IfData = TemplateStringData.Substring(StartIndex + _OriginalReplacementLineLength, ENDIFData - (StartIndex + _OriginalReplacementLineLength));
+
+            /// SEPERATE THE CONDITIONS (CURRENTLY ONLY SUPPORTS AND (&&)
+            string[] _IfConditions = _NewReplacementName.SplitString("&&", StringSplitOptions.RemoveEmptyEntries);
+
+            // Meets Condition Flag
+            bool _MeetsCondition = true;
+
+            //Loop Through All The If Statement Conditions
+            foreach (string _IfStatment in _IfConditions)
+            {
+                // GET Condition Test Data
+                string[] _ValueData = _IfStatment.SplitString("=", StringSplitOptions.RemoveEmptyEntries);
+
+                if (_ValueData.Length == 2)
+                {
+                    // PERFORM TEST
+                    // IF TRUE IS VALUE DO BOOL TEST WHERE !VAL = TRUE
+                    if (_ValueData[1] == "TRUE")
+                    {
+                        if (DR[_ValueData[0]].ToBool().Value == false) { _MeetsCondition = false; break; }
+                    }
+                    // IF FALSE IS VALUE DO BOOL TEST WHERE !VAL = FALSE
+                    else if (_ValueData[1] == "FALSE")
+                    {
+                        if (DR[_ValueData[0]].ToBool().Value == true) { _MeetsCondition = false; break; }
+                    }
+                    // IF Value is an Integer Perform and Integer Test
+                    else if (_ValueData[1].ToInt(-10101010) != -10101010)
+                    {
+                        if (DR[_ValueData[0]].ToInt(-10101010) != _ValueData[1].ToInt()) { _MeetsCondition = false; break; }
+                    }
+                    // ELSE DO A String Comparison (NON CASE SENSITIVE)
+                    else
+                    {
+                        if (DR[_ValueData[0]].ToString().ToLower() != _ValueData[1].ToString().ToLower()) { _MeetsCondition = false; break; }
+                    }
+                }
+                else if (_ValueData.Length > 2)
+                {
+                    _ValueData = _IfStatment.SplitString("!", StringSplitOptions.RemoveEmptyEntries);
+                    // PERFORM TEST
+                    // IF TRUE IS VALUE DO BOOL TEST WHERE !VAL = TRUE
+                    if (_ValueData[1] == "TRUE")
+                    {
+                        if (DR[_ValueData[0]].ToBool().Value != false) { _MeetsCondition = false; break; }
+                    }
+                    // IF FALSE IS VALUE DO BOOL TEST WHERE !VAL = FALSE
+                    else if (_ValueData[1] == "FALSE")
+                    {
+                        if (DR[_ValueData[0]].ToBool().Value != true) { _MeetsCondition = false; break; }
+                    }
+                    // IF Value is an Integer Perform and Integer Test
+                    else if (_ValueData[1].ToInt(-10101010) != -10101010)
+                    {
+                        if (DR[_ValueData[0]].ToInt(-10101010) == _ValueData[1].ToInt()) { _MeetsCondition = false; break; }
+                    }
+                    // ELSE DO A String Comparison (NON CASE SENSITIVE)
+                    else
+                    {
+                        if (DR[_ValueData[0]].ToString().ToLower() == _ValueData[1].ToString().ToLower()) { _MeetsCondition = false; break; }
+                    }
+                }
+            }
+
+            // Calculate End IF Statement Location
+            int _ENDIFPlacement = TemplateStringData.IndexOf("###END IF###", StartIndex) + 12;
+
+            // IF THE CONDITIONS WERE MET
+            if (_MeetsCondition)
+            {
+                // GET FULL IF STATEMENT TEXT INCLUDING END IF AND VALUE IN MIDDLE
+                string _BASEReplacement = TemplateStringData.Substring(StartIndex, _ENDIFPlacement - StartIndex);
+                // REPLACE THE IF STATEMENT GETTING RID OF IT
+                _BASEReplacement = _BASEReplacement.Replace(_OriginalReplacementName, "");
+                // REPLACE THE END IF STATEMENT GETTING RID OF IT
+                _BASEReplacement = _BASEReplacement.Replace("###END IF###", "");
+
+                _BASEReplacement = ProcessReplacementLogicMany(_BASEReplacement, TemplateClass, DR, DC, QueryStringData, SessionData);
+
+
+                // REMOVE THE TEMPLATE REPLACEMENT WITH NOTHING
+                TemplateStringData = TemplateStringData.Remove(StartIndex, _ENDIFPlacement - StartIndex);
+                // INSERT THE NEW IF DATA DEFINED
+                TemplateStringData = TemplateStringData.Insert(StartIndex, _BASEReplacement);
+                return TemplateStringData.IndexOf("###", StartIndex);
+            }
+            // IF The Conditions WERE Not MET
+            else
+            {
+                // REMOVE THE TEMPLATE REPLACEMENT WITH NOTHING
+                TemplateStringData = TemplateStringData.Remove(StartIndex, _ENDIFPlacement - StartIndex);
+                return TemplateStringData.IndexOf("###", StartIndex);
+            }
+        }
+
+    }
+}

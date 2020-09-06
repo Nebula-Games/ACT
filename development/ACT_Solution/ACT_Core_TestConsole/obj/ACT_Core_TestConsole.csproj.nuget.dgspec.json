@@ -28,10 +28,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "E:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
-          "H:\\Program Files (x86)\\DevExpress 19.1\\Components\\System\\Components\\Packages": {},
-          "H:\\Program Files (x86)\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/StonegateIQ/30de5c5c-c831-4e4f-9cc0-459a0f75cc4d/_packaging/ACT_FEED/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
