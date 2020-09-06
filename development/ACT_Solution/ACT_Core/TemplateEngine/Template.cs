@@ -6,7 +6,7 @@
 // Last Modified By : MarkAlicz
 // Last Modified On : 02-26-2019
 // ***********************************************************************
-// <copyright file="Template.cs" company="Stonegate Intel LLC">
+// <copyright file="Template.cs" company="Nebula Entertainment LLC">
 //     Copyright ©  2019
 // </copyright>
 // <summary>The template represents a block of information that needs to be processed.  A template can be partial or all containing.  </summary>

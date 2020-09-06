@@ -6,7 +6,7 @@
 // Last Modified By : MarkAlicz
 // Last Modified On : 02-26-2019
 // ***********************************************************************
-// <copyright file="System.Collections.Specialized.NameValueCollection.cs" company="Stonegate Intel LLC">
+// <copyright file="System.Collections.Specialized.NameValueCollection.cs" company="Nebula Entertainment LLC">
 //     Copyright ©  2019
 // </copyright>
 // <summary></summary>

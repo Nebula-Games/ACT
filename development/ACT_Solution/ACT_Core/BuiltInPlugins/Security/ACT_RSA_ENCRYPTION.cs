@@ -6,7 +6,7 @@
 // Last Modified By : MarkAlicz
 // Last Modified On : 03-18-2019
 // ***********************************************************************
-// <copyright file="ACT_RSA_ENCRYPTION.cs" company="Stonegate Intel LLC">
+// <copyright file="ACT_RSA_ENCRYPTION.cs" company="Nebula Entertainment LLC">
 //     Copyright ©  2019
 // </copyright>
 // <summary></summary>

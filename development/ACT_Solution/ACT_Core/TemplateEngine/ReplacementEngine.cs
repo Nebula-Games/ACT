@@ -6,7 +6,7 @@
 // Last Modified By : MarkAlicz
 // Last Modified On : 03-15-2019
 // ***********************************************************************
-// <copyright file="ReplacementEngine.cs" company="Stonegate Intel LLC">
+// <copyright file="ReplacementEngine.cs" company="Nebula Entertainment LLC">
 //     Copyright ©  2019
 // </copyright>
 // <summary></summary>

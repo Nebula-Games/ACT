@@ -6,7 +6,7 @@
 // Last Modified By : MarkAlicz
 // Last Modified On : 03-24-2019
 // ***********************************************************************
-// <copyright file="ACT_FTPConnection.cs" company="Stonegate Intel LLC">
+// <copyright file="ACT_FTPConnection.cs" company="Nebula Entertainment LLC">
 //     Copyright ©  2019
 // </copyright>
 // <summary></summary>

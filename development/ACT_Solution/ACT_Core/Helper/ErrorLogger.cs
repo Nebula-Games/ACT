@@ -6,7 +6,7 @@
 // Last Modified By : MarkAlicz
 // Last Modified On : 03-14-2019
 // ***********************************************************************
-// <copyright file="ErrorLogger.cs" company="Stonegate Intel LLC">
+// <copyright file="ErrorLogger.cs" company="Nebula Entertainment LLC">
 //     Copyright ©  2019
 // </copyright>
 // <summary></summary>

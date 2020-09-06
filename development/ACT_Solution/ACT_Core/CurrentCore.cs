@@ -6,7 +6,7 @@
 // Last Modified By : MarkAlicz
 // Last Modified On : 03-04-2019
 // ***********************************************************************
-// <copyright file="CurrentCore.cs" company="Stonegate Intel LLC">
+// <copyright file="CurrentCore.cs" company="Nebula Entertainment LLC">
 //     Copyright ©  2019
 // </copyright>
 // <summary></summary>

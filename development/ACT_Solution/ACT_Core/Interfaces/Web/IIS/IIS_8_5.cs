@@ -13,7 +13,7 @@
 // Last Modified By : MarkAlicz
 // Last Modified On : 02-26-2019
 // ***********************************************************************
-// <copyright file="IIS_8_5.cs" company="Stonegate Intel LLC">
+// <copyright file="IIS_8_5.cs" company="Nebula Entertainment LLC">
 //     Copyright ©  2019
 // </copyright>
 // <summary></summary>

@@ -6,7 +6,7 @@
 // Last Modified By : MarkAlicz
 // Last Modified On : 03-18-2019
 // ***********************************************************************
-// <copyright file="System.Data.DataTable.cs" company="Stonegate Intel LLC">
+// <copyright file="System.Data.DataTable.cs" company="Nebula Entertainment LLC">
 //     Copyright ©  2019
 // </copyright>
 // <summary></summary>

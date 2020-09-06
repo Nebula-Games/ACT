@@ -6,7 +6,7 @@
 // Last Modified By : MarkAlicz
 // Last Modified On : 03-09-2019
 // ***********************************************************************
-// <copyright file="ULong.cs" company="Stonegate Intel LLC">
+// <copyright file="ULong.cs" company="Nebula Entertainment LLC">
 //     Copyright ©  2019
 // </copyright>
 // <summary></summary>

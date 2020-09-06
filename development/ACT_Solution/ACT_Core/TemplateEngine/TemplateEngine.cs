@@ -6,7 +6,7 @@
 // Last Modified By : MarkAlicz
 // Last Modified On : 03-25-2019
 // ***********************************************************************
-// <copyright file="TemplateEngine.cs" company="Stonegate Intel LLC">
+// <copyright file="TemplateEngine.cs" company="Nebula Entertainment LLC">
 //     Copyright ©  2019
 // </copyright>
 // <summary></summary>
@@ -654,7 +654,7 @@ namespace ACT.Core.TemplateEngine
                 _CurrentDataAccess.Open(_ConnString);
 
                 /// EXECUTE THE STORED PROCEDURE CALLER
-                //StoneGate.STAMP.ACT_DB_Addons.EXEC_STORED_PROCEDURE(_DBCommand, _ProcParams);
+                
                 var _ProcResults = _CurrentDataAccess.RunCommand(_DBCommand, _ProcParams, true, System.Data.CommandType.StoredProcedure);
                 _CurrentDataAccess.Dispose();
                 _CurrentDataAccess = null;

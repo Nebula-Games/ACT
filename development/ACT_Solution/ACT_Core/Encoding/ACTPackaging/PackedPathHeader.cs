@@ -6,7 +6,7 @@
 // Last Modified By : MarkAlicz
 // Last Modified On : 03-10-2019
 // ***********************************************************************
-// <copyright file="PackedPathHeader.cs" company="Stonegate Intel LLC">
+// <copyright file="PackedPathHeader.cs" company="Nebula Entertainment LLC">
 //     Copyright ©  2019
 // </copyright>
 // <summary></summary>

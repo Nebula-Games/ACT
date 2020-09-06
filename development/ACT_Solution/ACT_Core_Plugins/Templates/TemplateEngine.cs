@@ -774,7 +774,7 @@ namespace ACT.Core.Web
                 _CurrentDataAccess.Open(_ConnString);
 
                 /// EXECUTE THE STORED PROCEDURE CALLER
-                //StoneGate.STAMP.ACT_DB_Addons.EXEC_STORED_PROCEDURE(_DBCommand, _ProcParams);
+                
                 var _ProcResults = _CurrentDataAccess.RunCommand(_DBCommand, _ProcParams, true, System.Data.CommandType.StoredProcedure);
                 _CurrentDataAccess.Dispose();
                 _CurrentDataAccess = null;

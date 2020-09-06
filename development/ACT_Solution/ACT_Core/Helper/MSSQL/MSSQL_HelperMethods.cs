@@ -6,7 +6,7 @@
 // Last Modified By : MarkAlicz
 // Last Modified On : 02-27-2019
 // ***********************************************************************
-// <copyright file="MSSQL_HelperMethods.cs" company="Stonegate Intel LLC">
+// <copyright file="MSSQL_HelperMethods.cs" company="Nebula Entertainment LLC">
 //     Copyright ©  2019
 // </copyright>
 // <summary></summary>
@@ -52,7 +52,7 @@ namespace ACT.Core.Helper.MSSQL
         public static string ExecuteLargeSQLScript(Types.Database.GenericConnectionInformation ConnectionInfo, Types.Database.MSSQL_LargeScript ScriptInfo)
         {
             string _CommandLineExecutionString = "sqlcmd ";
-            //- j - S sg - app - 01 - d SGI_CORE - U sa - P MandS1122 - i "c:\temp\RandomData.sql"
+            //- j - S sg - app - 01 - d SGI_CORE - U sa - P YourPassword - i "c:\temp\RandomData.sql"
 
             if (ScriptInfo.SQLFileLocation.FileExists() == false) { return null; }
             string _OutFile = ScriptInfo.OutputFileLocation.EnsureDirectoryFormat() + ScriptInfo.SQLFileLocation.GetFileNameWithoutExtension() + DateTime.Now.ToUnixTime().ToString() + ".txt";

@@ -6,7 +6,7 @@
 // Last Modified By : MarkAlicz
 // Last Modified On : 03-14-2019
 // ***********************************************************************
-// <copyright file="ACT_Database_Structure.cs" company="Stonegate Intel LLC">
+// <copyright file="ACT_Database_Structure.cs" company="Nebula Entertainment LLC">
 //     Copyright ©  2019
 // </copyright>
 // <summary></summary>

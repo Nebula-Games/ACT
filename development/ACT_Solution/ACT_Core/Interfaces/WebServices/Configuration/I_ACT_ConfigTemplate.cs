@@ -6,7 +6,7 @@
 // Last Modified By : MarkAlicz
 // Last Modified On : 02-26-2019
 // ***********************************************************************
-// <copyright file="I_ACT_ConfigTemplate.cs" company="Stonegate Intel LLC">
+// <copyright file="I_ACT_ConfigTemplate.cs" company="Nebula Entertainment LLC">
 //     Copyright ©  2019
 // </copyright>
 // <summary></summary>
