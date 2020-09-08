@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Min8aY2Hzmui97KoNXQRFCgdd3oDtLGqsJeFR4VTkr0TNErTwWkjrIgdD2/ELRd6H5OXlM4bD4AfTfHR2hVJaQ==",
+  "dgSpecHash": "ZN3KARYZQioZ2f+e85wkPcQJSdMxRRv4ib5GVYfiAN3aQ+VaOgpVR7q/wReoX3//X3xVnYnTz0oOm82bSICc+w==",
   "success": true,
   "projectFilePath": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj",
   "expectedPackageFiles": [
@@ -9,7 +9,6 @@
     "C:\\Users\\MarkAlicz.GAMERSGATHER\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.0.0\\microsoft.codeanalysis.analyzers.3.0.0.nupkg.sha512",
     "C:\\Users\\MarkAlicz.GAMERSGATHER\\.nuget\\packages\\microsoft.codeanalysis.common\\3.7.0\\microsoft.codeanalysis.common.3.7.0.nupkg.sha512",
     "C:\\Users\\MarkAlicz.GAMERSGATHER\\.nuget\\packages\\microsoft.codeanalysis.csharp\\3.7.0\\microsoft.codeanalysis.csharp.3.7.0.nupkg.sha512",
-    "C:\\Users\\MarkAlicz.GAMERSGATHER\\.nuget\\packages\\microsoft.codedom.providers.dotnetcompilerplatform\\3.6.0\\microsoft.codedom.providers.dotnetcompilerplatform.3.6.0.nupkg.sha512",
     "C:\\Users\\MarkAlicz.GAMERSGATHER\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\MarkAlicz.GAMERSGATHER\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.5\\microsoft.extensions.configuration.3.1.5.nupkg.sha512",
     "C:\\Users\\MarkAlicz.GAMERSGATHER\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\3.1.5\\microsoft.extensions.configuration.abstractions.3.1.5.nupkg.sha512",
@@ -129,16 +128,5 @@
     "C:\\Users\\MarkAlicz.GAMERSGATHER\\.nuget\\packages\\system.xml.xpath\\4.3.0\\system.xml.xpath.4.3.0.nupkg.sha512",
     "C:\\Users\\MarkAlicz.GAMERSGATHER\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.CodeDom.Providers.DotNetCompilerPlatform 3.6.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.CodeDom.Providers.DotNetCompilerPlatform",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    }
-  ]
+  "logs": []
 }

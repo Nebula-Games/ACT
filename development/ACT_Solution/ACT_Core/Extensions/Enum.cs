@@ -30,7 +30,7 @@ namespace ACT.Core.Extensions
         /// </summary>
         /// <param name="x">The x.</param>
         /// <returns>System.String.</returns>
-        public static string GetStringValue(this Enum x)
+        public static string GetStringValue_FromAttribute(this Enum x)
         {            
             string output = "";
             Type type = x.GetType();
@@ -49,7 +49,7 @@ namespace ACT.Core.Extensions
         /// <param name="x">The x.</param>
         /// <param name="v">The v.</param>
         /// <returns>Enum.</returns>
-        public static Enum FromStringValue(this Enum x, string v)
+        public static Enum GetEnum_FromAttribute(this Enum x, string v)
         {
             if (v == null) { return null; }
 
@@ -73,6 +73,18 @@ namespace ACT.Core.Extensions
         }
 
         /// <summary>
+        /// Gets the Enum Text from the Value of the Specificed Enum
+        /// </summary>
+        /// <typeparam name="T">Enum Type Definition</typeparam>
+        /// <param name="x">Enum Value</param>
+        /// <returns></returns>
+        public static string GetEnumName_FromValue<T>(this Enum x)
+        {
+            return Enum.GetName(typeof(T), x);
+        }
+
+
+        /// <summary>
         /// Froms the string.
         /// </summary>
         /// <param name="x">The x.</param>
@@ -91,7 +103,7 @@ namespace ACT.Core.Extensions
         /// <returns><c>true</c> if [has string value] [the specified v]; otherwise, <c>false</c>.</returns>
         public static bool HasStringValue(this Enum x, string v)
         {
-            if (x.FromStringValue(v) == null)
+            if (x.GetEnum_FromAttribute(v) == null)
             {
                 return false;
             }

@@ -19,9 +19,12 @@ using System.Reflection;
 using System.Xml.Serialization;
 using System.Xml;
 using System.IO;
-using Microsoft.CodeDom.Providers.DotNetCompilerPlatform;
 using ACT.Core.Extensions;
 using System.CodeDom.Compiler;
+using Microsoft.CodeAnalysis.Text;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis;
+
 
 namespace ACT.Core.Dynamic
 {
@@ -280,21 +283,21 @@ namespace ACT.Core.Dynamic
         }
 
 
-        static Lazy<CSharpCodeProvider> CodeProvider { get; } = new Lazy<CSharpCodeProvider>(() => {
-            var csc = new CSharpCodeProvider();
-            var settings = csc
-                .GetType()
-                .GetField("_compilerSettings", BindingFlags.Instance | BindingFlags.NonPublic)
-                .GetValue(csc);
+        //static Lazy<CSharpCodeProvider> CodeProvider { get; } = new Lazy<CSharpCodeProvider>(() => {
+        //    var csc = new CSharpCodeProvider();
+        //    var settings = csc
+        //        .GetType()
+        //        .GetField("_compilerSettings", BindingFlags.Instance | BindingFlags.NonPublic)
+        //        .GetValue(csc);
 
-            var path = settings
-                .GetType()
-                .GetField("_compilerFullPath", BindingFlags.Instance | BindingFlags.NonPublic);
+        //    var path = settings
+        //        .GetType()
+        //        .GetField("_compilerFullPath", BindingFlags.Instance | BindingFlags.NonPublic);
 
-            path.SetValue(settings, ((string)path.GetValue(settings)).Replace(@"bin\roslyn\", @"roslyn\"));
+        //    path.SetValue(settings, ((string)path.GetValue(settings)).Replace(@"bin\roslyn\", @"roslyn\"));
 
-            return csc;
-        });
+        //    return csc;
+        //});
 
         /// <summary>
         /// Compiles the code.

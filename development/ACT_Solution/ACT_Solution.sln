@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACT_Core_TestConsole", "ACT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACT_Core", "ACT_Core\ACT_Core.csproj", "{89DBE14A-FF30-4153-8007-73DD238B4528}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACT_Core_Plugins", "ACT_Core_Plugins\ACT_Core_Plugins.csproj", "{75E7D652-821C-494E-BE26-9606D711C11C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACT_Core_Plugins", "ACT_Core_Plugins\ACT_Core_Plugins.csproj", "{75E7D652-821C-494E-BE26-9606D711C11C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web Projects", "Web Projects", "{408D63D7-5E32-4766-A76B-B851B16359F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
