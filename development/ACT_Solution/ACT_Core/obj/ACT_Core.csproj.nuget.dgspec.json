@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj": {}
+    "C:\\NebulaSystems\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj": {}
   },
   "projects": {
-    "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj": {
+    "C:\\NebulaSystems\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj",
+        "projectUniqueName": "C:\\NebulaSystems\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj",
         "projectName": "ACT_Core",
-        "projectPath": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj",
-        "packagesPath": "C:\\Users\\MarkAlicz.GAMERSGATHER\\.nuget\\packages\\",
-        "outputPath": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\obj\\",
+        "projectPath": "C:\\NebulaSystems\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj",
+        "packagesPath": "C:\\Users\\Andrew\\.nuget\\packages\\",
+        "outputPath": "C:\\NebulaSystems\\ACT\\development\\ACT_Solution\\ACT_Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "H:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\MarkAlicz.GAMERSGATHER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Andrew\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -26,8 +27,8 @@
           "netcoreapp3.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "E:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
