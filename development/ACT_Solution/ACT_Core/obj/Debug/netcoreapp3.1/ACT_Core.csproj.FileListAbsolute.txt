@@ -1,4 +1,7 @@
 E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core\obj\Debug\netcoreapp3.1\ACT_Core.AssemblyInfoInputs.cache
 E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core\obj\Debug\netcoreapp3.1\ACT_Core.AssemblyInfo.cs
 E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core\obj\Debug\netcoreapp3.1\ACT_Core.csproj.CoreCompileInputs.cache
-E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core\obj\Debug\netcoreapp3.1\ACT_Core.csprojAssemblyReference.cache
+C:\NebulaSystems\ACT\development\ACT_Solution\ACT_Core\obj\Debug\netcoreapp3.1\ACT_Core.csprojAssemblyReference.cache
+C:\NebulaSystems\ACT\development\ACT_Solution\ACT_Core\obj\Debug\netcoreapp3.1\ACT_Core.AssemblyInfoInputs.cache
+C:\NebulaSystems\ACT\development\ACT_Solution\ACT_Core\obj\Debug\netcoreapp3.1\ACT_Core.AssemblyInfo.cs
+C:\NebulaSystems\ACT\development\ACT_Solution\ACT_Core\obj\Debug\netcoreapp3.1\ACT_Core.csproj.CoreCompileInputs.cache

@@ -306,7 +306,7 @@ namespace ACT.Core.Dynamic
         /// <returns>Assembly.</returns>
         public static Assembly CompileCode(string Code)
         {
-
+            // Drew was here... 
             var csc = CodeProvider;
 
             var parameters = new CompilerParameters(new[] { "System.dll" });
