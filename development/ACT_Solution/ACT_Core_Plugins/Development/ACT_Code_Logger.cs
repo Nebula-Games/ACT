@@ -154,7 +154,7 @@ namespace ACT.Plugins.Development
         public void Initialize()
         {
             string _tmp = ACT.Core.SystemSettings.GetSettingByName("ACT_Code_Logger_Configuration").Value;
-            if (_tmp.NullOrEmpty()) { throw new Exception("Missing Configuration Setting: ACT_Code_Logger_Configuration - " + ACT.Core.SystemSettings.LoadedSettingsDirectory); }
+            //if (_tmp.NullOrEmpty()) { throw new Exception("Missing Configuration Setting: ACT_Code_Logger_Configuration - " + ACT.Core.SystemSe); }
 
             Initialize(_tmp);
         }

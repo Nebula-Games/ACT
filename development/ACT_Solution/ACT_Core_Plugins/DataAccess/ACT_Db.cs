@@ -582,6 +582,11 @@ namespace ACT.Plugins.DataAccess
             return _TmpExport.ToString();
         }
 
+        public void SetImpersonate(object UserInfo)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 

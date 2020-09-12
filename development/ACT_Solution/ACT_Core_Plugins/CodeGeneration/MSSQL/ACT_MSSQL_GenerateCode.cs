@@ -34,5 +34,10 @@ namespace ACT.Plugins.CodeGeneration.MSSQL
         {
             throw new NotImplementedException();
         }
+
+        public void SetImpersonate(object UserInfo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

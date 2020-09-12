@@ -16,6 +16,10 @@ namespace ACT.Plugins.DataAccess
 {
     public class ACT_DbStoredProcedureParameter : ACT_Core, I_DbStoredProcedureParameter
     {
+        public void SetImpersonate(object UserInfo)
+        {
+            throw new NotImplementedException();
+        }
         public string Name
         {
             get; set;

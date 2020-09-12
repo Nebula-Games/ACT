@@ -12,22 +12,25 @@ using System.Reflection;
 using ACT.Core.Extensions;
 using ACT.Core;
 using ACT.Core.Enums;
-using System.Data.SQLite;
 using System.Data.SqlClient;
-
+using Microsoft.Data.Sqlite;
 namespace ACT.Plugins.DataAccess
 {
     public class ACT_SQLite3 : ACT_Core, I_DataAccess
     {
-
+        public void SetImpersonate(object UserInfo)
+        {
+            throw new NotImplementedException();
+        }
         public ACT_SQLite3()
         {
             _ConnectionString = SystemSettings.GetSettingByName("DefaultConnectionString").Value;
         }
 
         #region Private Variables
-        private SQLiteConnection _Connection = new SQLiteConnection();
-        private SQLiteCommand _Command = new SQLiteCommand();
+        
+        private SqliteConnection _Connection = new SqliteConnection();
+        private SqliteCommand _Command = new SqliteCommand();
         //private SQLiteTransaction _Transaction = new SQLiteTransaction();
         private string _ConnectionString;
       //  private int _CommandTimeoutInSeconds = -1;
@@ -170,7 +173,7 @@ namespace ACT.Plugins.DataAccess
 
             _Connection.ConnectionString = _ConnectionString;
 
-            if (_Connection == null) { _Connection = new SQLiteConnection(); }
+            if (_Connection == null) { _Connection = new SqliteConnection(); }
 
             if (_Connection.State == System.Data.ConnectionState.Closed) { _Connection.Open(); }
 
@@ -343,7 +346,7 @@ namespace ACT.Plugins.DataAccess
 
             try
             {
-                using (SQLiteCommand _Command = new SQLiteCommand(_Connection))
+                using (SqliteCommand _Command = new SqliteCommand())
                 {
                     _Command.CommandText = CommandText;
                     _Command.CommandType = CmdType;
@@ -384,7 +387,7 @@ namespace ACT.Plugins.DataAccess
             {
                 try
                 {
-                    using (SQLiteCommand _Command = new SQLiteCommand(_Connection))
+                    using (SqliteCommand _Command = new SqliteCommand())
                     {
                         _Command.CommandText = CommandTexts[cx];
                         _Command.CommandType = CmdTypes[cx];
@@ -575,8 +578,9 @@ namespace ACT.Plugins.DataAccess
 
         #endregion
                      
-        private static System.Data.DataTable GetDataTableFromReader(SQLiteDataReader Reader)
+        private static System.Data.DataTable GetDataTableFromReader(SqliteDataReader Reader)
         {
+            
             System.Data.DataTable _TmpReturn;
             using (ACT.Core.Helper.Database.InternalDataAdapter _IDA = new ACT.Core.Helper.Database.InternalDataAdapter())
             {

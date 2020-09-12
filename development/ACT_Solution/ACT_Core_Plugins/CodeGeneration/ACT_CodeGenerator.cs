@@ -37,6 +37,8 @@ namespace ACT.Plugins.CodeGeneration
     /// <seealso cref="ACT.Core.Interfaces.CodeGeneration.I_CodeGenerator" />
     public partial class ACT_CodeGenerator : ACT.Plugins.ACT_Core, ACT.Core.Interfaces.CodeGeneration.I_CodeGenerator
     {
+        
+
         #region Variables Used By The Generator
 
         /// <summary>
@@ -730,10 +732,12 @@ namespace ACT.Plugins.CodeGeneration
         {
             if (CodeSettings.SettingsFileLocation.NullOrEmpty() == false)
             {
+                /*
                 if (ACT.Core.SystemSettings.LoadedSettingsDirectory.EnsureDirectoryFormat() != CodeSettings.SettingsFileLocation.GetDirectoryFromFileLocation().EnsureDirectoryFormat())
                 {
                     ACT.Core.SystemSettings.LoadSystemSettings(CodeSettings.SettingsFileLocation);
                 }
+                */
             }
         }
 
@@ -901,9 +905,9 @@ namespace ACT.Plugins.CodeGeneration
         /// Impersonate a User
         /// </summary>
         /// <param name="Info">I_UserInfo that represents the user to impersonate and execute under</param>
-        public override void SetImpersonate(ACT.Core.Interfaces.Security.Authentication.I_UserInfo Info)
+        public void SetImpersonate(object Info)
         {
-            _ActiveUserInfo = Info;
+           // _ActiveUserInfo = Info;
         }
 
         #endregion

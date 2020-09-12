@@ -16,7 +16,10 @@ namespace ACT.Plugins.DataAccess
 {
     public class ACT_DbStoredProcedure : ACT.Plugins.ACT_Core, ACT.Core.Interfaces.DataAccess.I_DbStoredProcedure
     {
-
+        public void SetImpersonate(object UserInfo)
+        {
+            throw new NotImplementedException();
+        }
         int _AgeInDays = -1;
         List<I_DbStoredProcedureParameter> _Parameters = new List<I_DbStoredProcedureParameter>();
 

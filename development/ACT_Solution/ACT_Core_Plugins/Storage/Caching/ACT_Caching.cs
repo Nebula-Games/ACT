@@ -7,7 +7,7 @@ using ACT.Core.Enums;
 using ACT.Core.Enums.Common;
 using ACT.Core.Interfaces.Common;
 using ACT.Core.Interfaces.Security.Authentication;
-using ACT.Core.SystemConfiguration;
+using ACT.Core.Types.SystemConfiguration;
 
 namespace ACT.Plugins.Storage.Caching
 {
@@ -19,7 +19,10 @@ namespace ACT.Plugins.Storage.Caching
         private bool _EnsureStateRecovery = false;
         private int _StateRecoveryLevel = 0;
         private Dictionary<string, BasicSetting> _ConfigurationSettings = new Dictionary<string, BasicSetting>();
-
+        public void SetImpersonate(object UserInfo)
+        {
+            throw new NotImplementedException();
+        }
         public Dictionary<string, dynamic> DATA { get { return _DATA; } set { _DATA = value; } }
         public override bool HasChanged { get { return _HasChanged; } set { _HasChanged = value; } }
 

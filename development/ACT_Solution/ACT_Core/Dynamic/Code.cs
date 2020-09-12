@@ -20,6 +20,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
 using ACT.Core.Extensions;
 using System.Threading;
+using System.Reflection;
 
 namespace ACT.Core.Dynamic
 {
@@ -28,16 +29,38 @@ namespace ACT.Core.Dynamic
     /// </summary>
     public class DynamicCode
     {
+        /// <summary>
+        /// Dynamic Code
+        /// </summary>
+        /// <param name="FileLocation"></param>
         public DynamicCode(string FileLocation)
         {
             if (FileLocation.FileExists() == false) { throw new System.IO.FileNotFoundException(); }
-
             Code = FileLocation.ReadAllText();
             if (FileLocation.ToLower().EndsWith("cs")) { CodeLanguageVersion = LanguageVersion.Latest; }
             else { throw new Exception("Not Supported"); }
-            Description = FileLocation;
+            Name = FileLocation.GetFileNameWithoutExtension(); Description = "From Library Compile Code";
+            CodeLanguageVersion = LanguageVersion.Latest;
+            Language = CodeLanguageVersion.GetEnumName_FromValue<LanguageVersion>();
+            Dependancies = new List<string>();
+        }
+
+        /// <summary>
+        /// Dynamic Code From String
+        /// </summary>
+        /// <param name="CodeToCompile"></param>
+        /// <param name="CodeLanguage"></param>
+        /// <param name="AdditionalReferences"></param>
+        public DynamicCode(string CodeToCompile, Microsoft.CodeAnalysis.CSharp.LanguageVersion CodeLanguage = LanguageVersion.Default, List<string>? AdditionalReferences = null)
+        {
+            Name = ""; Description = "From Library Compile Code"; Language = CodeLanguage.GetEnumName_FromValue<LanguageVersion>();
+            CodeLanguageVersion = CodeLanguage;
+            Code = CodeToCompile;
+            if (AdditionalReferences != null) { Dependancies = AdditionalReferences; }
+            else { Dependancies = new List<string>(); }
 
         }
+
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
@@ -69,7 +92,7 @@ namespace ACT.Core.Dynamic
             }
             else
             {
-                if (LangVer== LanguageVersion.Default)
+                if (LangVer == LanguageVersion.Default)
                 {
                     try { CodeLanguageVersion = (LanguageVersion)LangVer.FromString(Ver); return; } catch { }
                 }
@@ -91,64 +114,39 @@ namespace ACT.Core.Dynamic
         /// <value>The dependancies.</value>
         public List<string> Dependancies { get; set; }
 
-        internal class Compiler
+
+        public static Assembly? GenerateCode(DynamicCode code)
         {
-            public byte[] Compile(string filepath)
+            var codeString = SourceText.From(code.Code);
+            var options = CSharpParseOptions.Default.WithLanguageVersion(code.CodeLanguageVersion);
+
+            var parsedSyntaxTree = SyntaxFactory.ParseSyntaxTree(codeString, options);
+
+            var references = new MetadataReference[]
             {
-                DynamicCode _Code = new DynamicCode(filepath);
-
-                Console.WriteLine($"Starting compilation of: '{filepath}'");
-
-                var sourceCode = File.ReadAllText(filepath);
-
-                using (var peStream = new MemoryStream())
-                {
-                    var result = GenerateCode(_Code).Emit(peStream);
-
-                    if (!result.Success)
-                    {
-                        Console.WriteLine("Compilation done with error.");
-
-                        var failures = result.Diagnostics.Where(diagnostic => diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error);
-
-                        foreach (var diagnostic in failures)
-                        {
-                            Console.Error.WriteLine("{0}: {1}", diagnostic.Id, diagnostic.GetMessage());
-                        }
-
-                        return null;
-                    }
-
-                    Console.WriteLine("Compilation done without any error.");
-
-                    peStream.Seek(0, SeekOrigin.Begin);
-
-                    return peStream.ToArray();
-                }
-            }
-
-            private static CSharpCompilation GenerateCode(DynamicCode code)
-            {
-                var codeString = SourceText.From(code.Code);
-                var options = CSharpParseOptions.Default.WithLanguageVersion(code.CodeLanguageVersion);
-
-                var parsedSyntaxTree = SyntaxFactory.ParseSyntaxTree(codeString, options);
-
-                var references = new MetadataReference[]
-                {
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Console).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(System.Runtime.AssemblyTargetedPatchBandAttribute).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo).Assembly.Location),
-                };
 
-                return CSharpCompilation.Create("Hello.dll",
-                    new[] { parsedSyntaxTree },
-                    references: references,
-                    options: new CSharpCompilationOptions(OutputKind.ConsoleApplication,
-                        optimizationLevel: OptimizationLevel.Release,
-                        assemblyIdentityComparer: DesktopAssemblyIdentityComparer.Default));
-            }
+            };
+
+            var _cSComp = CSharpCompilation.Create(code.Name.EnsureEndsWith(".dll"),
+                new[] { parsedSyntaxTree },
+                references: references,
+                options: new CSharpCompilationOptions(OutputKind.ConsoleApplication,
+                    optimizationLevel: OptimizationLevel.Release,
+                    assemblyIdentityComparer: DesktopAssemblyIdentityComparer.Default));
+
+            string P = "";
+            var _P = "".GetExecutingAssemblyPathDirectory();
+            if (_P != null) { P = _P.EnsureDirectoryFormat(); }
+
+            var _BaseResult = _cSComp.Emit(P, null, null, P, null);
+            if (_BaseResult.Success) { return Assembly.LoadFile(P); }
+            else { return null; }
+
         }
+
     }
 }

@@ -1070,7 +1070,8 @@ namespace ACT.Plugins.CodeGeneration
                 System.IO.File.Copy(AppDomain.CurrentDomain.BaseDirectory + "Bin\\ACT.Core.dll", CodeSettings.RootOutputDirectory + "\\Project\\Bin\\ACT.Core.dll");
             }
 
-            System.IO.File.WriteAllText(CodeSettings.RootOutputDirectory + "\\Project\\Bin\\SystemConfiguration.xml", ACT.Core.SystemSettings.ExportXMLData());
+            //TODO Fix ME
+            //System.IO.File.WriteAllText(CodeSettings.RootOutputDirectory + "\\Project\\Bin\\SystemConfiguration.xml", ACT.Core.SystemSettings.ExportXMLData());
 
         }
 
@@ -1537,6 +1538,11 @@ namespace ACT.Plugins.CodeGeneration
         public override void SetImpersonate(ACT.Core.Interfaces.Security.Authentication.I_UserInfo Info)
         {
             throw new Exception("Not Implemented");
+        }
+
+        public void SetImpersonate(object UserInfo)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

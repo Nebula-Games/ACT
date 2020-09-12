@@ -23,6 +23,7 @@ using System.Text.RegularExpressions;
 using System.Security;
 using ACT.Core.Types;
 using ACT.Core.Helper;
+using Microsoft.Win32.SafeHandles;
 
 
 #endregion
@@ -450,6 +451,27 @@ namespace ACT.Core.Extensions
             }
 
             return _TmpReturn;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static string? GetExecutingAssemblyPathDirectory(this string x)
+        {
+            string? _tmpReturn = "";
+            var _GEA = System.Reflection.Assembly.GetEntryAssembly();
+            if (_GEA != null)
+            {
+                _tmpReturn = System.IO.Path.GetDirectoryName(_GEA.Location);
+            }
+            else
+            {
+                return x;
+            }
+
+            return _tmpReturn;
         }
 
     }

@@ -178,7 +178,7 @@ namespace ACT.Plugins.CodeGeneration
                 System.IO.File.Copy(AppDomain.CurrentDomain.BaseDirectory + "Bin\\ACT.Core.dll", CodeSettings.RootOutputDirectory + "\\Project\\Bin\\ACT.Core.dll");
             }
 
-            System.IO.File.WriteAllText(CodeSettings.RootOutputDirectory + "\\Project\\Bin\\SystemConfiguration.xml", ACT.Core.SystemSettings.ExportXMLData());
+         //   System.IO.File.WriteAllText(CodeSettings.RootOutputDirectory + "\\Project\\Bin\\SystemConfiguration.xml", ACT.Core.SystemSettings.ExportXMLData());
 
         }
 

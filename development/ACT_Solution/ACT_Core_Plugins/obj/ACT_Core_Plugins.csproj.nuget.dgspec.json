@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\NebulaSystems\\ACT\\development\\ACT_Solution\\ACT_Core_Plugins\\ACT_Core_Plugins.csproj": {}
+    "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core_Plugins\\ACT_Core_Plugins.csproj": {}
   },
   "projects": {
-    "C:\\NebulaSystems\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj": {
+    "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\NebulaSystems\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj",
+        "projectUniqueName": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj",
         "projectName": "ACT_Core",
-        "projectPath": "C:\\NebulaSystems\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj",
-        "packagesPath": "C:\\Users\\Andrew\\.nuget\\packages\\",
-        "outputPath": "C:\\NebulaSystems\\ACT\\development\\ACT_Solution\\ACT_Core\\obj\\",
+        "projectPath": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj",
+        "packagesPath": "C:\\Users\\MarkAlicz.GAMERSGATHER\\.nuget\\packages\\",
+        "outputPath": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "H:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Andrew\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\MarkAlicz.GAMERSGATHER\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -27,8 +26,8 @@
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "E:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -61,9 +60,17 @@
               "target": "Package",
               "version": "[3.7.0, )"
             },
+            "Microsoft.Data.Sqlite": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.Data.Sqlite.Core": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
             "Microsoft.Extensions.Primitives": {
               "target": "Package",
-              "version": "[3.1.7, )"
+              "version": "[3.1.8, )"
             },
             "Microsoft.Win32.Primitives": {
               "target": "Package",
@@ -109,6 +116,14 @@
               "target": "Package",
               "version": "[4.7.0, )"
             },
+            "System.DirectoryServices": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.DirectoryServices.AccountManagement": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
             "System.Drawing.Common": {
               "target": "Package",
               "version": "[4.7.0, )"
@@ -128,6 +143,10 @@
             "System.IO.FileSystem.AccessControl": {
               "target": "Package",
               "version": "[4.7.0, )"
+            },
+            "System.Memory": {
+              "target": "Package",
+              "version": "[4.5.4, )"
             },
             "System.Runtime": {
               "target": "Package",
@@ -173,25 +192,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\NebulaSystems\\ACT\\development\\ACT_Solution\\ACT_Core_Plugins\\ACT_Core_Plugins.csproj": {
+    "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core_Plugins\\ACT_Core_Plugins.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\NebulaSystems\\ACT\\development\\ACT_Solution\\ACT_Core_Plugins\\ACT_Core_Plugins.csproj",
+        "projectUniqueName": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core_Plugins\\ACT_Core_Plugins.csproj",
         "projectName": "ACT_Core_Plugins",
-        "projectPath": "C:\\NebulaSystems\\ACT\\development\\ACT_Solution\\ACT_Core_Plugins\\ACT_Core_Plugins.csproj",
-        "packagesPath": "C:\\Users\\Andrew\\.nuget\\packages\\",
-        "outputPath": "C:\\NebulaSystems\\ACT\\development\\ACT_Solution\\ACT_Core_Plugins\\obj\\",
+        "projectPath": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core_Plugins\\ACT_Core_Plugins.csproj",
+        "packagesPath": "C:\\Users\\MarkAlicz.GAMERSGATHER\\.nuget\\packages\\",
+        "outputPath": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core_Plugins\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "H:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Andrew\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\MarkAlicz.GAMERSGATHER\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -200,15 +218,15 @@
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "E:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\NebulaSystems\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj": {
-                "projectPath": "C:\\NebulaSystems\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj"
+              "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj": {
+                "projectPath": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj"
               }
             }
           }
@@ -230,6 +248,22 @@
               "target": "Package",
               "version": "[32.4.4, )"
             },
+            "Google.Apis": {
+              "target": "Package",
+              "version": "[1.49.0, )"
+            },
+            "Google.Apis.Auth": {
+              "target": "Package",
+              "version": "[1.49.0, )"
+            },
+            "Google.Apis.Core": {
+              "target": "Package",
+              "version": "[1.49.0, )"
+            },
+            "Google.Apis.Drive.v3": {
+              "target": "Package",
+              "version": "[1.49.0.2065, )"
+            },
             "Microsoft.CSharp": {
               "target": "Package",
               "version": "[4.7.0, )"
@@ -238,13 +272,9 @@
               "target": "Package",
               "version": "[3.7.0, )"
             },
-            "Microsoft.CodeDom.Providers.DotNetCompilerPlatform": {
-              "target": "Package",
-              "version": "[3.6.0, )"
-            },
             "Microsoft.Extensions.Primitives": {
               "target": "Package",
-              "version": "[3.1.7, )"
+              "version": "[3.1.8, )"
             },
             "Microsoft.Win32.Primitives": {
               "target": "Package",
@@ -282,6 +312,14 @@
               "target": "Package",
               "version": "[4.7.0, )"
             },
+            "System.DirectoryServices": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.DirectoryServices.AccountManagement": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
             "System.IO": {
               "target": "Package",
               "version": "[4.3.0, )"
@@ -338,7 +376,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

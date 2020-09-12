@@ -24,6 +24,11 @@ namespace ACT.Plugins.Serialization
 
     public class ACT_MixedMode_Cache : ACT.Plugins.ACT_Core, ACT.Core.Interfaces.Serialization.I_CacheEngine
     {
+        public void SetImpersonate(object UserInfo)
+        {
+            throw new NotImplementedException();
+        }
+
         ///-------------------------------------------------------------------------------------------------
         /// <summary>   In Memory Usage. </summary>
         ///

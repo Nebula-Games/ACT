@@ -26,7 +26,10 @@ namespace ACT.Plugins.Security.UserData
         public bool IsPrimaryShipping { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool IsPrimaryBilling { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool IsPrimaryContact { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
+        public void SetImpersonate(object UserInfo)
+        {
+            throw new NotImplementedException();
+        }
         public I_TestResult Delete()
         {
             throw new NotImplementedException();

@@ -36,6 +36,9 @@ namespace ACT.Plugins.DataAccess
             throw new NotImplementedException();
         }
 
-       
+        public void SetImpersonate(object UserInfo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

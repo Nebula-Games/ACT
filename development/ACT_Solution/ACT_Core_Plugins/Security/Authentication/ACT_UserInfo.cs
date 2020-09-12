@@ -24,7 +24,10 @@ namespace ACT.Plugins.Security.Authentication
             get;
             set;
         }
-
+        public void SetImpersonate(object UserInfo)
+        {
+            throw new NotImplementedException();
+        }
         public Dictionary<string, string> AdditionalInfo
         {
             get;

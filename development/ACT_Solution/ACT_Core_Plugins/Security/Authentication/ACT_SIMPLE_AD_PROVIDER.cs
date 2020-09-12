@@ -15,7 +15,7 @@ namespace ACT.Plugins.Security.Authentication
     public class ACT_SIMPLE_AD_PROVIDER : ACT.Core.Abstract.Security.Authentication.ACT_ABSTRACT_I_SIMPLE_SECURITY_PROVIDER_ACTIVE_DIRECTORY_LOGIN
     {
         public override bool HasChanged { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
+     
         public override List<string> PublicProperties => throw new NotImplementedException();
 
         public override I_TestResult CreateUser(string UserName, string PassWord, Dictionary<string, string> AdditionalData, I_UserInfo NewUserInfo)
@@ -72,8 +72,8 @@ namespace ACT.Plugins.Security.Authentication
         {
             throw new NotImplementedException();
         }
-
-        public override void SetImpersonate(I_UserInfo UserInfo)
+           
+        public override void SetImpersonate(object UserInfo)
         {
             throw new NotImplementedException();
         }

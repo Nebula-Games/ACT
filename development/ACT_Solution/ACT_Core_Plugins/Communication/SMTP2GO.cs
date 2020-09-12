@@ -34,7 +34,10 @@ namespace ACT.Plugins.Communication
         {
             throw new NotImplementedException();
         }
-
+        public void SetImpersonate(object UserInfo)
+        {
+            throw new NotImplementedException();
+        }
         public I_TestResult ImportXMLData(string XML)
         {
             throw new NotImplementedException();

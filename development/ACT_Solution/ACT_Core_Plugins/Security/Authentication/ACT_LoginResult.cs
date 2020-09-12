@@ -10,6 +10,10 @@ namespace ACT.Plugins.Security.Authentication
 {
     public class ACT_LoginResult : ACT.Plugins.ACT_Core, I_LoginResult
     {
+        public void SetImpersonate(object UserInfo)
+        {
+            throw new NotImplementedException();
+        }
         string _TokenID;
         DateTime _ValidTill;
         Dictionary<string, string> _AdditionalInformation;

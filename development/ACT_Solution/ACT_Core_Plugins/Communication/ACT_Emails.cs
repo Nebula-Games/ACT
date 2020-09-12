@@ -10,6 +10,10 @@ namespace ACT.Plugins.Communication
 {
     public class ACT_Emails : ACT.Plugins.ACT_Core, ACT.Core.Interfaces.Communication.I_Emails
     {
+        public void SetImpersonate(object UserInfo)
+        {
+            throw new NotImplementedException();
+        }
         public Guid StartBatch() { return Guid.NewGuid(); }
         public bool SendBatch() { return false; }
         public Core.Interfaces.Common.I_TestResult SendEmail(List<string> To, List<string> CC, List<string> BCC, string ReplyTo, string Subject, string Body)

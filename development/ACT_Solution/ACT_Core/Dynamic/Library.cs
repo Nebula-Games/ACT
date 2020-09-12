@@ -304,31 +304,12 @@ namespace ACT.Core.Dynamic
         /// </summary>
         /// <param name="Code">The code.</param>
         /// <returns>Assembly.</returns>
-        public static Assembly CompileCode(string Code)
+        public static Assembly? CompileCode(string Code)
         {
-            // Drew was here... 
-            var csc = CodeProvider;
+            DynamicCode _Code = new DynamicCode(Code, LanguageVersion.Latest, new List<string>() { "System.dll", "System.Core.dll", "System.Data.dll", "System.Data.DataSetExtensions.dll", "System.XML.dll", "System.XML.Linq.dll", "ACT_Core.dll"  });
 
-            var parameters = new CompilerParameters(new[] { "System.dll" });
+            return DynamicCode.GenerateCode(_Code);
 
-            parameters.ReferencedAssemblies.Add("System.Core.dll");
-            parameters.ReferencedAssemblies.Add("System.Data.dll");
-            parameters.ReferencedAssemblies.Add("System.Data.DataSetExtensions.dll");
-            parameters.ReferencedAssemblies.Add("System.XML.dll");
-            parameters.ReferencedAssemblies.Add("System.XML.Linq.dll");
-            if (System.IO.File.Exists(AppDomain.CurrentDomain.BaseDirectory + "ACT.Core.dll"))
-            {
-                parameters.ReferencedAssemblies.Add(AppDomain.CurrentDomain.BaseDirectory + "ACT.Core.dll");
-            }
-            else if (System.IO.File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Bin\\ACT.Core.dll"))
-            {
-                parameters.ReferencedAssemblies.Add(AppDomain.CurrentDomain.BaseDirectory + "Bin\\ACT.Core.dll");
-            }
-
-            parameters.GenerateExecutable = false;
-            CompilerResults results = csc.Value.CompileAssemblyFromSource(parameters, Code);
-            results.Errors.Cast<CompilerError>().ToList().ForEach(error => System.Console.WriteLine(error.ErrorText));
-            return results.CompiledAssembly;
         }
     }
 
