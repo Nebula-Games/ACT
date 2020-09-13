@@ -11,6 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACT_Core_Plugins", "ACT_Cor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web Projects", "Web Projects", "{408D63D7-5E32-4766-A76B-B851B16359F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACT_Core_WebAPI", "ACT_Core_WebAPI\ACT_Core_WebAPI.csproj", "{04AE9285-4DB1-4081-8933-6F66BC7A3F50}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{673A4955-1820-49C3-9898-1FE0E48D61AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebAPI", "WebAPI", "{A0706ED7-A645-47CD-A61C-FADDEC1D4A29}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\WebAPI\ACT_WebAPI_Guide.docx = Documentation\WebAPI\ACT_WebAPI_Guide.docx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,9 +38,17 @@ Global
 		{75E7D652-821C-494E-BE26-9606D711C11C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75E7D652-821C-494E-BE26-9606D711C11C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75E7D652-821C-494E-BE26-9606D711C11C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04AE9285-4DB1-4081-8933-6F66BC7A3F50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04AE9285-4DB1-4081-8933-6F66BC7A3F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04AE9285-4DB1-4081-8933-6F66BC7A3F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04AE9285-4DB1-4081-8933-6F66BC7A3F50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{04AE9285-4DB1-4081-8933-6F66BC7A3F50} = {408D63D7-5E32-4766-A76B-B851B16359F1}
+		{A0706ED7-A645-47CD-A61C-FADDEC1D4A29} = {673A4955-1820-49C3-9898-1FE0E48D61AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4C335F9B-A0BF-440B-9B16-760191F369DD}

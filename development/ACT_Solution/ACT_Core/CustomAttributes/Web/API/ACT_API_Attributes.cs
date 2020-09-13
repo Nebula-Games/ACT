@@ -13,6 +13,7 @@
 // ***********************************************************************
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,5 +57,15 @@ namespace ACT.Core.CustomAttributes.Web.API
         /// </summary>
         /// <value><c>true</c> if [session management]; otherwise, <c>false</c>.</value>
         public bool SessionManagement { get; set; }
+    }
+
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Field, AllowMultiple = true, Inherited = false)]
+    public class ACTAuthorization : System.Attribute
+    {        
+        public string? AuthorizationRole { get; set; }
+        public ACT.Core.Enums.AccessLevel AccessLevel { get; set; }
+        public ACT.Core.Enums.ErrorLevel AccessDeniedSeverity { get; set; }
+
+
     }
 }
