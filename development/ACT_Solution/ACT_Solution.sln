@@ -20,7 +20,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebAPI", "WebAPI", "{A0706E
 		Documentation\WebAPI\ACT_WebAPI_Guide.docx = Documentation\WebAPI\ACT_WebAPI_Guide.docx
 	EndProjectSection
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ACT_Shared_Resources", "ACT_Shared_Resources\ACT_Shared_Resources.shproj", "{3BCD9E69-8B15-4A7B-B053-D0573F7F6BE1}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		ACT_Shared_Resources\ACT_Shared_Resources.projitems*{3bcd9e69-8b15-4a7b-b053-d0573f7f6be1}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

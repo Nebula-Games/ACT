@@ -18,6 +18,16 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using ACT.Core.Extensions;
 
+namespace ACT.Core.Constants
+{
+
+    public static class Constants_FILETYPES
+    {
+        public const string TXTFileExtensions = "txt,text,js,html,htm,cs,vb,json,xml,csv,ini";
+
+    }
+}
+
 namespace ACT.Core
 {
     /// <summary>
@@ -113,7 +123,8 @@ namespace ACT.Core
             /// </summary>
             /// <param name="BaseDirectory"></param>
             /// <returns></returns>
-            public static string InstallationDirectory(string BaseDirectory = "") {
+            public static string InstallationDirectory(string BaseDirectory = "")
+            {
 
 
                 if (_FoundResourceDirectories.ContainsKey(BaseDirectory)) { return _FoundResourceDirectories[BaseDirectory].EnsureDirectoryFormat() + "Installation\\"; }
@@ -195,6 +206,8 @@ namespace ACT.Core
             }
 
         }
+
+
 
         #region TEXT Constants
 

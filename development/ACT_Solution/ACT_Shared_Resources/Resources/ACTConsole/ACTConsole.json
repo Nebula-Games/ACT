@@ -1,0 +1,102 @@
+﻿{
+  "id": "0",
+  "menutitle": "ACT MAIN MENU",
+  "verbosedebugging": true,
+  "logalltoconsole": false,
+  // This must point to a class that implements ACT.Core.Interfaces.Common.I_ErrorLoggable
+  //  leaving Blank will use the default ErrorLogger Plugin defined in the systemconfiguration.json
+  "loggerplugininfo": {
+    "dll": "",
+    "fullclassname": ""
+  },
+  "encryptionstring": "askjjdijkasdkkjaskdjkjasdas",
+  "text": "Welcome To The Menu Text",
+  "shortcut": "",
+  "executecallback": "",
+  "adminpassword": "",
+  "debugpassword": "",
+  "dll": "baseDLL",
+  "requireenterkey": true,
+  "helptext": "file:ACTConsolehelp.json",
+  "menu": [
+    {
+      "id": "1",
+      "text": "Sample Menu Text",
+      "shortcut": "SMT",
+      "dll": "",
+      "fullclassname": "",
+      "executecallback": "SampleDLLGenericCallback",
+      "isadminfeature": false,
+      "isdebugfeature": false,
+      "hidden": false,
+      "menu": [
+        {
+          "id": "10",
+          "text": "Sample Sub Menu Level 2",
+          "shortcut": "SSML2",
+          "executecallback": "GenericCallback",
+          "dll": "",
+          "fullclassname": "",
+          "isadminfeature": false,
+          "isdebugfeature": false,
+          "hidden": false
+        },
+        {
+          "id": "11",
+          "text": "Sample Second Sub Menu Level 2",
+          "shortcut": "SSSSML2",
+          "executecallback": "GenericCallback",
+          "dll": "",
+          "fullclassname": "",
+          "isadminfeature": false,
+          "isdebugfeature": false,
+          "hidden": false,
+          "menu": [
+            {
+              "id": "111",
+              "text": "Sample Second Menu Level 3",
+              "shortcut": "SSML3",
+              "executecallback": "GenericCallback",
+              "dll": "",
+              "fullclassname": "",
+              "isadminfeature": false,
+              "isdebugfeature": false,
+              "hidden": false,
+              "menu": [
+                {
+                  "id": "1111",
+                  "text": "Sample Second Menu Level 4",
+                  "shortcut": "SSML4",
+                  "executecallback": "GenericCallback",
+                  "dll": "",
+                  "fullclassname": "",
+                  "isadminfeature": false,
+                  "isdebugfeature": false,
+                  "hidden": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "text": "Sample Menu Text 2",
+      "shortcut": "SMT2",
+      "menu": [
+        {
+          "id": "21",
+          "text": "Sample Sub Menu 2 Level 2",
+          "shortcut": "SSM2L2",
+          "dll": "SampleDLL.dll",
+          "fullclassname": "Sample.MenuHandlers.SampleClass",
+          "executecallback": "SampleDLLGenericCallback",
+          "isadminfeature": false,
+          "isdebugfeature": false,
+          "hidden": false
+        }
+      ]
+    }
+  ]
+}

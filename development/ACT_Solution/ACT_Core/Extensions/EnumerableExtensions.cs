@@ -35,8 +35,8 @@ namespace ACT.Core.Extensions
         /// <param name="action">The action.</param>
         public static void ForEach<T>([NotNull] this IEnumerable<T> list, [NotNull] Action<T> action)
         {
-          //  CodeContracts.VerifyNotNull(list, "list");
-         //   CodeContracts.VerifyNotNull(action, "action");
+            //  CodeContracts.VerifyNotNull(list, "list");
+            //   CodeContracts.VerifyNotNull(action, "action");
 
             foreach (var item in list.ToList())
             {
@@ -52,8 +52,8 @@ namespace ACT.Core.Extensions
         /// <param name="action">The action.</param>
         public static void ForEachFirst<T>([NotNull] this IEnumerable<T> list, [NotNull] Action<T, bool> action)
         {
-           // CodeContracts.VerifyNotNull(list, "list");
-          //  CodeContracts.VerifyNotNull(action, "action");
+            // CodeContracts.VerifyNotNull(list, "list");
+            //  CodeContracts.VerifyNotNull(action, "action");
 
             bool isFirst = true;
             foreach (var item in list.ToList())
@@ -71,8 +71,8 @@ namespace ACT.Core.Extensions
         /// <param name="action">The action.</param>
         public static void ForEachIndex<T>([NotNull] this IEnumerable<T> list, [NotNull] Action<T, int> action)
         {
-          //  CodeContracts.VerifyNotNull(list, "list");
-          //  CodeContracts.VerifyNotNull(action, "action");
+            //  CodeContracts.VerifyNotNull(list, "list");
+            //  CodeContracts.VerifyNotNull(action, "action");
 
             int i = 0;
             foreach (var item in list.ToList())
@@ -128,10 +128,13 @@ namespace ACT.Core.Extensions
         [NotNull]
         public static HashSet<T> ToHashSet<T>([NotNull] this IEnumerable<T> list)
         {
-           // CodeContracts.VerifyNotNull(list, "list");
+            // CodeContracts.VerifyNotNull(list, "list");
 
             return new HashSet<T>(list);
         }
+
+
+      
 
         #endregion
     }

@@ -135,7 +135,7 @@ namespace ACT.Core.Windows.Console
             _Choices = _Choices.TrimEnd(", ") + " )";
 
             System.Console.Write(_Choices);
-        getSelection:
+            getSelection:
             System.Console.WriteLine("");
             System.Console.Write(":> ");
             var _Choice = System.Console.ReadLine();
@@ -159,7 +159,7 @@ namespace ACT.Core.Windows.Console
             System.Console.ForegroundColor = FontColor;
             System.Console.Write(Prompt);
 
-        getfile:
+            getfile:
 
             System.Console.WriteLine(Prompt);
             System.Console.WriteLine("Hit enter without typing a file to exit and abort.");
@@ -208,7 +208,7 @@ namespace ACT.Core.Windows.Console
             System.Console.ForegroundColor = FontColor;
             System.Console.Write(Prompt);
 
-        getfile:
+            getfile:
 
             System.Console.WriteLine(Prompt);
             System.Console.WriteLine("Type \"exit\" or nothing to exit and abort.");
@@ -219,7 +219,7 @@ namespace ACT.Core.Windows.Console
             if (Create == true)
             {
                 try { _tmpReturn.CreateDirectoryStructure(null); }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     System.Console.WriteLine("Unable to create/find the specified path: " + ex.Message);
                     goto getfile;
@@ -233,7 +233,7 @@ namespace ACT.Core.Windows.Console
                     goto getfile;
                 }
             }
-            
+
             System.Console.ForegroundColor = _OriginalColor;
             return _tmpReturn.EnsureDirectoryFormat();
         }
@@ -278,6 +278,26 @@ namespace ACT.Core.Windows.Console
 
             System.Console.ForegroundColor = _OriginalColor;
             return _tmpReturn;
+        }
+
+        /// <summary>
+        /// Advanced Writeline Function with Additional Options
+        /// </summary>
+        /// <param name="TextToWrite"></param>
+        /// <param name="FontColor"></param>
+        /// <param name="BackColor"></param>
+        public static void WriteLine(string TextToWrite, System.ConsoleColor FontColor = ConsoleColor.White, System.ConsoleColor BackColor = ConsoleColor.Black)
+        {
+            var _tmpFontColor = System.Console.ForegroundColor;
+            var _tmpBackColor = System.Console.BackgroundColor;
+
+            System.Console.ForegroundColor = FontColor;
+            System.Console.BackgroundColor = BackColor;
+
+            foreach (string txtLine in TextToWrite.SplitString(Environment.NewLine, StringSplitOptions.None)) { System.Console.WriteLine(txtLine); }
+
+            System.Console.ForegroundColor = _tmpFontColor;
+            System.Console.BackgroundColor = _tmpBackColor;
         }
     }
 }

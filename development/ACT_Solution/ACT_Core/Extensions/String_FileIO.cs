@@ -801,6 +801,46 @@ namespace ACT.Core.Extensions
         }
 
         /// <summary>
+        /// Search For a File and Return the Data as a byte[]
+        /// </summary>
+        /// <param name="SearchPath"></param>
+        /// <param name="FileName"></param>
+        /// <returns></returns>
+        public static byte[] FindAndReadFile(this string SearchPath, string FileName)
+        {
+            string _foundPath = SearchPath.EnsureDirectoryFormat().FindFileReturnPath(FileName, true);
+
+            if (_foundPath.NullOrEmpty()) { return null; }
+
+            _foundPath = _foundPath + FileName;
+            return _foundPath.ReadAll();
+        }
+
+        /// <summary>
+        /// Search For A File And Return the String Contents 
+        /// </summary>
+        /// <param name="SearchPath"></param>
+        /// <param name="FileName"></param>
+        /// <param name="ConvertBinaryToBase64">Convert Binary files To Base64Strings</param>
+        /// <returns></returns>
+        public static string FindAndReadFile(this string SearchPath, string FileName, bool ConvertBinaryToBase64 = true)
+        {
+            string _foundPath = SearchPath.EnsureDirectoryFormat().FindFileReturnPath(FileName, true);
+            if (_foundPath.NullOrEmpty()) { return null; }
+            _foundPath = _foundPath + FileName;
+            
+            if (ACT.Core.Constants.Constants_FILETYPES.TXTFileExtensions.Contains(FileName.GetExtensionFromFileName().ToLower()))
+            {
+                return _foundPath.ReadAllText();
+            }
+            else
+            {
+                if (ConvertBinaryToBase64) { return _foundPath.ReadAll().ToBase64String(); }
+                else { return null; }
+            }
+        }
+
+        /// <summary>
         /// FindFile and return the Path Optionally Searches Sub Folder
         /// </summary>
         /// <param name="path">Path to Start In</param>
@@ -813,14 +853,14 @@ namespace ACT.Core.Extensions
 
             if (System.IO.Directory.EnumerateFiles(path).Any(x => x.GetFileNameFromFullPath().ToLower() == fileName.ToLower()))
             {
-                return path;
+                return path.EnsureDirectoryFormat();
             }
             else if (searchSubFolders)
             {
                 foreach (string d in System.IO.Directory.GetDirectories(path))
                 {
                     var _P = FindFileReturnPath(d, fileName, searchSubFolders);
-                    if (_P != "") { return _P; }
+                    if (_P != "") { return _P.EnsureDirectoryFormat(); }
                 }
 
                 return "";

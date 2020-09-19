@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NLog" Version="4.7.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ACT_Core\ACT_Core.csproj" />
     <ProjectReference Include="..\ACT_Core_Plugins\ACT_Core_Plugins.csproj" />
   </ItemGroup>

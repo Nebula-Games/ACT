@@ -88,6 +88,18 @@
               "target": "Package",
               "version": "[4.7.0, )"
             },
+            "NLog": {
+              "target": "Package",
+              "version": "[4.7.4, )"
+            },
+            "NLog.Extensions.Logging": {
+              "target": "Package",
+              "version": "[1.6.5, )"
+            },
+            "NLog.Schema": {
+              "target": "Package",
+              "version": "[4.7.4, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[12.0.3, )"
@@ -291,6 +303,18 @@
             "Microsoft.Win32.SystemEvents": {
               "target": "Package",
               "version": "[4.7.0, )"
+            },
+            "NLog": {
+              "target": "Package",
+              "version": "[4.7.4, )"
+            },
+            "NLog.Extensions.Logging": {
+              "target": "Package",
+              "version": "[1.6.5, )"
+            },
+            "NLog.Schema": {
+              "target": "Package",
+              "version": "[4.7.4, )"
             },
             "Pluralize.NET.Core": {
               "target": "Package",
