@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACT_Core_Plugins", "ACT_Cor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web Projects", "Web Projects", "{408D63D7-5E32-4766-A76B-B851B16359F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACT_Core_WebAPI", "ACT_Core_WebAPI\ACT_Core_WebAPI.csproj", "{04AE9285-4DB1-4081-8933-6F66BC7A3F50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACT_Core_WebAPI", "ACT_Core_WebAPI\ACT_Core_WebAPI.csproj", "{04AE9285-4DB1-4081-8933-6F66BC7A3F50}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{673A4955-1820-49C3-9898-1FE0E48D61AF}"
 EndProject
@@ -22,9 +22,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebAPI", "WebAPI", "{A0706E
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ACT_Shared_Resources", "ACT_Shared_Resources\ACT_Shared_Resources.shproj", "{3BCD9E69-8B15-4A7B-B053-D0573F7F6BE1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CCB0E3F2-1E06-43C7-A37F-A554082F31F7}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		ACT_Shared_Resources\ACT_Shared_Resources.projitems*{3bcd9e69-8b15-4a7b-b053-d0573f7f6be1}*SharedItemsImports = 13
+		ACT_Shared_Resources\ACT_Shared_Resources.projitems*{be454ea0-9de0-4f37-a7cb-7f439345384c}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

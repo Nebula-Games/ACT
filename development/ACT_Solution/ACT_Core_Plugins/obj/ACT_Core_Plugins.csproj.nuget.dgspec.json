@@ -23,7 +23,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net5.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -31,7 +31,8 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
+          "net5.0": {
+            "targetAlias": "net5.0",
             "projectReferences": {}
           }
         },
@@ -42,15 +43,16 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
+        "net5.0": {
+          "targetAlias": "net5.0",
           "dependencies": {
             "EPPlus": {
               "target": "Package",
-              "version": "[5.3.1, )"
+              "version": "[5.4.2, )"
             },
             "FluentFTP": {
               "target": "Package",
-              "version": "[32.4.4, )"
+              "version": "[33.0.3, )"
             },
             "Microsoft.CSharp": {
               "target": "Package",
@@ -58,19 +60,19 @@
             },
             "Microsoft.CodeAnalysis.CSharp": {
               "target": "Package",
-              "version": "[3.7.0, )"
+              "version": "[3.8.0, )"
             },
             "Microsoft.Data.Sqlite": {
               "target": "Package",
-              "version": "[3.1.8, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.Data.Sqlite.Core": {
               "target": "Package",
-              "version": "[3.1.8, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.Extensions.Primitives": {
               "target": "Package",
-              "version": "[3.1.8, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.Win32.Primitives": {
               "target": "Package",
@@ -78,19 +80,19 @@
             },
             "Microsoft.Win32.Registry": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.Win32.Registry.AccessControl": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.Win32.SystemEvents": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
             },
             "NLog": {
               "target": "Package",
-              "version": "[4.7.4, )"
+              "version": "[4.7.6, )"
             },
             "NLog.Extensions.Logging": {
               "target": "Package",
@@ -98,7 +100,7 @@
             },
             "NLog.Schema": {
               "target": "Package",
-              "version": "[4.7.4, )"
+              "version": "[4.7.6, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -110,7 +112,7 @@
             },
             "RestSharp": {
               "target": "Package",
-              "version": "[106.11.4, )"
+              "version": "[106.11.7, )"
             },
             "SSH.NET": {
               "target": "Package",
@@ -118,7 +120,7 @@
             },
             "System.CodeDom": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",
@@ -126,19 +128,19 @@
             },
             "System.Diagnostics.EventLog": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
             },
             "System.DirectoryServices": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
             },
             "System.DirectoryServices.AccountManagement": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
             },
             "System.Drawing.Common": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
             },
             "System.Drawing.Primitives": {
               "target": "Package",
@@ -154,7 +156,11 @@
             },
             "System.IO.FileSystem.AccessControl": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
+            },
+            "System.Management": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "System.Memory": {
               "target": "Package",
@@ -182,11 +188,11 @@
             },
             "System.Security.Cryptography.ProtectedData": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
             },
             "System.ServiceModel.Primitives": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[4.8.0, )"
             }
           },
           "imports": [
@@ -204,7 +210,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -227,7 +233,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net5.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -235,7 +241,8 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
+          "net5.0": {
+            "targetAlias": "net5.0",
             "projectReferences": {
               "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj": {
                 "projectPath": "E:\\Development\\NebulaGames_GIT\\ACT\\ACT\\development\\ACT_Solution\\ACT_Core\\ACT_Core.csproj"
@@ -250,15 +257,16 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
+        "net5.0": {
+          "targetAlias": "net5.0",
           "dependencies": {
             "EPPlus": {
               "target": "Package",
-              "version": "[5.3.1, )"
+              "version": "[5.4.2, )"
             },
             "FluentFTP": {
               "target": "Package",
-              "version": "[32.4.4, )"
+              "version": "[33.0.3, )"
             },
             "Google.Apis": {
               "target": "Package",
@@ -274,7 +282,7 @@
             },
             "Google.Apis.Drive.v3": {
               "target": "Package",
-              "version": "[1.49.0.2065, )"
+              "version": "[1.49.0.2160, )"
             },
             "Microsoft.CSharp": {
               "target": "Package",
@@ -282,11 +290,11 @@
             },
             "Microsoft.CodeAnalysis.CSharp": {
               "target": "Package",
-              "version": "[3.7.0, )"
+              "version": "[3.8.0, )"
             },
             "Microsoft.Extensions.Primitives": {
               "target": "Package",
-              "version": "[3.1.8, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.Win32.Primitives": {
               "target": "Package",
@@ -294,19 +302,19 @@
             },
             "Microsoft.Win32.Registry": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.Win32.Registry.AccessControl": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.Win32.SystemEvents": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
             },
             "NLog": {
               "target": "Package",
-              "version": "[4.7.4, )"
+              "version": "[4.7.6, )"
             },
             "NLog.Extensions.Logging": {
               "target": "Package",
@@ -314,7 +322,7 @@
             },
             "NLog.Schema": {
               "target": "Package",
-              "version": "[4.7.4, )"
+              "version": "[4.7.6, )"
             },
             "Pluralize.NET.Core": {
               "target": "Package",
@@ -322,7 +330,7 @@
             },
             "RestSharp": {
               "target": "Package",
-              "version": "[106.11.4, )"
+              "version": "[106.11.7, )"
             },
             "SSH.NET": {
               "target": "Package",
@@ -334,15 +342,15 @@
             },
             "System.Diagnostics.EventLog": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
             },
             "System.DirectoryServices": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
             },
             "System.DirectoryServices.AccountManagement": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
             },
             "System.IO": {
               "target": "Package",
@@ -354,7 +362,7 @@
             },
             "System.IO.FileSystem.AccessControl": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
             },
             "System.Runtime": {
               "target": "Package",
@@ -378,11 +386,11 @@
             },
             "System.Security.Cryptography.ProtectedData": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
             },
             "System.ServiceModel.Primitives": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[4.8.0, )"
             }
           },
           "imports": [
@@ -400,7 +408,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

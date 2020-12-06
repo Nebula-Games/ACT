@@ -19,7 +19,7 @@ namespace ACT.Core.Types.SystemConfiguration
     /// </summary>
     public class SystemConfiguration : Interfaces.Data.I_DB_Store, Interfaces.Plugins.I_Simple_Plugin, ICloneable, Interfaces.IO.I_Saveable, IComparable, Interfaces.Security.Hashing.I_ACT_SecureHash
     {
-
+        public static int CurrentFileVersion = 2;
         #region Hashing Methods
 
         /// <summary>

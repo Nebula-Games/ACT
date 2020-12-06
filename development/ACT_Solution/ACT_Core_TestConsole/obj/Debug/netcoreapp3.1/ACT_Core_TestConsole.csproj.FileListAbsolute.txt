@@ -118,3 +118,16 @@ E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestCon
 E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\ACT_Core_Plugins.pdb
 E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\obj\Debug\netcoreapp3.1\ACT_Core_TestConsole.csprojAssemblyReference.cache
 E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\obj\Debug\netcoreapp3.1\ACT_Core_TestConsole.csproj.CopyComplete
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\Resources\SystemConfiguration.json
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\Resources\ACTConsole\ACTConsolehelp.txt
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\Resources\ACTConsole\ACTConsole.json
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\Resources\Plugins\NLog.config
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\NLog.dll
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\bin\Debug\netcoreapp3.1\NLog.Extensions.Logging.dll
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_TestConsole\obj\Debug\netcoreapp3.1\ACT_Core_TestConsole.csproj.CoreCompileInputs.cache

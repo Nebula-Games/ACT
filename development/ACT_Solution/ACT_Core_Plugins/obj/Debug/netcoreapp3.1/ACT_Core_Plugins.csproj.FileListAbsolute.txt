@@ -9,3 +9,4 @@ E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins
 E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\obj\Debug\netcoreapp3.1\ACT_Core_Plugins.csproj.CopyComplete
 E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\obj\Debug\netcoreapp3.1\ACT_Core_Plugins.dll
 E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\obj\Debug\netcoreapp3.1\ACT_Core_Plugins.pdb
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\obj\Debug\netcoreapp3.1\ACT_Core_Plugins.csproj.CoreCompileInputs.cache

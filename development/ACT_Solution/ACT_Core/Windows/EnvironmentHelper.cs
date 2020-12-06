@@ -19,8 +19,7 @@ namespace ACT.Core.Windows
 {
     /// <summary>
     /// Environment Variable Helper Including PATH Directory Management
-    /// </summary>
-    [PrincipalPermission(SecurityAction.Demand, Role = @"BUILTIN\Administrators")]
+    /// </summary>   
     public static class EnvironmentHelper
     {
 
@@ -31,17 +30,23 @@ namespace ACT.Core.Windows
         static extern bool SendNotifyMessage(IntPtr hWnd, uint Msg,
             UIntPtr wParam, string lParam);
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
         public static void AddPathDirectory(string DirectoryToAdd, string CleanupMatch, bool Cleanup = true)
         {
-            using (var envKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) { }
+            else
+            {
+                using (var envKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(
                  @"SYSTEM\CurrentControlSet\Control\Session Manager\Environment",
                  true))
-            {
-                Contract.Assert(envKey != null, @"registry key is missing!");
-                var _PATHDATA = envKey.GetValue("PATH");
-                SendNotifyMessage((IntPtr)HWND_BROADCAST, WM_SETTINGCHANGE,
-                    (UIntPtr)0, "Environment");
+                {
+                    Contract.Assert(envKey != null, @"registry key is missing!");
+                    var _PATHDATA = envKey.GetValue("PATH");
+                    SendNotifyMessage((IntPtr)HWND_BROADCAST, WM_SETTINGCHANGE,
+                        (UIntPtr)0, "Environment");
+                }
             }
+
         }
     }
 }

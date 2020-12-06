@@ -1,0 +1,15 @@
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\bin\Debug\net5.0\ACT_Core_Plugins.deps.json
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\bin\Debug\net5.0\ACT_Core_Plugins.dll
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\bin\Debug\net5.0\ref\ACT_Core_Plugins.dll
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\bin\Debug\net5.0\ACT_Core_Plugins.pdb
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\bin\Debug\net5.0\ACT_Core.dll
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\bin\Debug\net5.0\ACT_Core.pdb
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\obj\Debug\net5.0\ACT_Core_Plugins.csprojAssemblyReference.cache
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\obj\Debug\net5.0\ACT_Core_Plugins.GeneratedMSBuildEditorConfig.editorconfig
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\obj\Debug\net5.0\ACT_Core_Plugins.AssemblyInfoInputs.cache
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\obj\Debug\net5.0\ACT_Core_Plugins.AssemblyInfo.cs
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\obj\Debug\net5.0\ACT_Core_Plugins.csproj.CoreCompileInputs.cache
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\obj\Debug\net5.0\ACT_Core_Plugins.csproj.CopyComplete
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\obj\Debug\net5.0\ACT_Core_Plugins.dll
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\obj\Debug\net5.0\ref\ACT_Core_Plugins.dll
+E:\Development\NebulaGames_GIT\ACT\ACT\development\ACT_Solution\ACT_Core_Plugins\obj\Debug\net5.0\ACT_Core_Plugins.pdb

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using ACT.Core.Extensions;
 using System.Linq;
-using ACT.Core.Types.SystemConfiguration;
+using sysc = ACT.Core.Types.SystemConfiguration;
+using System.Reflection;
 
 namespace ACT.Core
 {
@@ -46,6 +47,23 @@ namespace ACT.Core
             }
 
             return true;
+        }
+
+        public static void GenerateSystemSettingsTemplate()
+        {
+            sysc.SystemConfiguration _SysConfig = new Types.SystemConfiguration.SystemConfiguration();
+            _SysConfig.FileVersion = sysc.SystemConfiguration.CurrentFileVersion;
+            _SysConfig.BasicSettings = new List<sysc.BasicSetting>();
+
+            var _Asm = Assembly.GetExecutingAssembly();
+            foreach(Type typ in _Asm.GetTypes().Where(x => x.IsInterface))
+            {
+                string _fullName = typ.FullName;
+                var _Att = typ.GetAttributeValue(typeof(ACT.Core.CustomAttributes.ClassID));
+                
+                
+
+            }
         }
 
         public static bool HasSettingWithValue(string SettingName)

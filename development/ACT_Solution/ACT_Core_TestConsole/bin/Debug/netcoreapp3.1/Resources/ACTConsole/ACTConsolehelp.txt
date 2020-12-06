@@ -1,0 +1,3 @@
+﻿Welcome to the ###MENUTITLE### Console Management System.###LINEBREAK###
+---------------------------------------------------------###LINEBREAK###
+To use the menu type the menu shortcut. 
